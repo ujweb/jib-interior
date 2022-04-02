@@ -76,17 +76,24 @@
 
 // Make a button look and behave like a link
 .btn-link {
+  padding-top: 5px;
+  padding-bottom: 5px;
   font-weight: $font-weight-normal;
   color: $btn-link-color;
   text-decoration: $link-decoration;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
 
-  &:hover {
+  &:hover, &.active {
     color: $btn-link-hover-color;
     text-decoration: $link-hover-decoration;
+    border-bottom-color: $btn-link-hover-color;
   }
 
   &:focus {
     text-decoration: $link-hover-decoration;
+    border-bottom-color: $btn-link-hover-color;
   }
 
   &:disabled,
