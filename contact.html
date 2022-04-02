@@ -24,14 +24,20 @@
                     <li><a class="btn-link" href="about.html">關於 Jib</a></li>
                     <li><a class="btn-link" href="works.html">設計作品</a></li>
                     <li><a class="btn-link" href="products.html">家具選購</a></li>
-                    <li><a class="btn-link" href="contact.html" class="btn btn-outline-primary">預約諮詢</a></li>
+                    <li><a class="btn btn-outline-primary" href="contact.html">預約諮詢</a></li>
                 </ul>
             </nav>
-            <button type="button" class="btn p-20">
-                <span class="material-icons-outlined d-block">
-                    shopping_cart
-                </span>
-            </button>
+            <a href="checkout.html" class="btn btn-cart p-20">
+                <div class="position-relative">
+                    <span class="material-icons-outlined d-block">
+                        shopping_cart
+                    </span>
+                    <span class="position-absolute badge rounded-pill bg-danger">
+                        10
+                        <span class="visually-hidden">購物車數量</span>
+                    </span>
+                </div>
+            </a>
         </div>
     </header>
     <main>
@@ -60,35 +66,35 @@
                             <li><a href="contact.html" class="btn-link active">聯絡我們</a></li>
                         </ul>
                     </div>
-                    <div class="content col-lx-8 col-md-9">
+                    <div class="content col-xl-8 col-md-9">
                         <form>
                             <div class="mb-20">
-                                <label for="name" class="form-label mb-10">* 聯絡人姓名</label>
+                                <label for="name" class="form-label mb-10"><span class="text-danger">*</span> 聯絡人姓名</label>
                                 <input type="text" class="form-control" id="name" placeholder="請輸入聯絡人姓名">
                             </div>
                             <div class="mb-20">
-                                <label for="phone" class="form-label mb-10">* 聯絡電話</label>
+                                <label for="phone" class="form-label mb-10"><span class="text-danger">*</span> 聯絡電話</label>
                                 <input type="tel" class="form-control" id="phone" placeholder="請輸入聯絡電話">
                             </div>
                             <div class="mb-20">
-                                <label for="email" class="form-label mb-10">* Email</label>
+                                <label for="email" class="form-label mb-10"><span class="text-danger">*</span> Email</label>
                                 <input type="email" class="form-control" id="email" placeholder="請輸入 Email">
                             </div>
                             <div class="mb-20">
-                                <label for="ask" class="form-label mb-10">* 詢問內容</label>
+                                <label for="ask" class="form-label mb-10"><span class="text-danger">*</span> 詢問內容</label>
                                 <textarea class="form-control" id="ask" rows="3" placeholder="請輸入詢問內容"></textarea>
                             </div>
                             <div class="form-check mb-40">
                                 <input class="form-check-input" type="checkbox" value="" id="readCheck">
                                 <label class="form-check-label" for="readCheck">
                                     我已閱讀並同意個資聲明<br/>
-                                    <span class="fs-4">
+                                    <span class="fs-4 text-gray-400">
                                         Jib 室內設計公司（以下統稱我們）為本服務之目的向您蒐集、處理、利用您的資料包括您的【姓名、電話、Email 或其他得以直接或間接識別您個人之資料】，通過遞交此表格，您確認同意我們按照隱私權聲明存儲及處理您的個人資料。<br/>
                                         您可依個人資料保護法規定，就您的個人資料向我們行使下列權利：(1) 查詢或請求閱覽 (2) 請求製給複製本 (3) 請求補充或更正 (4) 請求停止蒐集、處理及利用 (5) 請求刪除。
                                     </span>
                                 </label>
                             </div>
-                            <button type="button" class="btn btn-primary w-100">確認送出</button>
+                            <button type="button" class="btn btn-lg btn-primary fs-3 w-100">確認送出</button>
                         </form>
                     </div>
                 </div>

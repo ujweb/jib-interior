@@ -24,14 +24,20 @@
                     <li><a class="btn-link" href="about.html">關於 Jib</a></li>
                     <li><a class="btn-link" href="works.html">設計作品</a></li>
                     <li><a class="btn-link" href="products.html">家具選購</a></li>
-                    <li><a class="btn-link" href="contact.html" class="btn btn-outline-primary">預約諮詢</a></li>
+                    <li><a class="btn btn-outline-primary" href="contact.html">預約諮詢</a></li>
                 </ul>
             </nav>
-            <button type="button" class="btn p-20">
-                <span class="material-icons-outlined d-block">
-                    shopping_cart
-                </span>
-            </button>
+            <a href="checkout.html" class="btn btn-cart p-20">
+                <div class="position-relative">
+                    <span class="material-icons-outlined d-block">
+                        shopping_cart
+                    </span>
+                    <span class="position-absolute badge rounded-pill bg-danger">
+                        10
+                        <span class="visually-hidden">購物車數量</span>
+                    </span>
+                </div>
+            </a>
         </div>
     </header>
     <main>
@@ -67,7 +73,7 @@
                                     <div class="swiper-prev swiper-prev-product">
                                         <span class="material-icons-outlined">chevron_left</span>
                                     </div>
-                                    <div class="swiper-pagination swiper-pagination-product position-static mt-10"></div>
+                                    <div class="swiper-pagination swiper-pagination-product position-static mt-10 d-md-none"></div>
                                 </div>
                                 <div thumbsSlider="" class="swiper product-thumbnail mt-20 d-md-block d-none">
                                     <div class="swiper-wrapper">
@@ -93,19 +99,23 @@
                                 <h1 class="mt-10 mb-0">Buendia 77 拱形弧形落地燈</h1>
                                 <div class="fs-1 mb-0">NT$6,300</div>
                             </div>
-                            <div class="my-20">
+                            <div class="text-gray-400 my-20">
                                 名字：Buendia 77 拱形弧形落地燈<br/>
                                 尺寸：長 14.50 吋 x 寬 43.50 吋 x 高 77.00 吋<br/>
                                 材質：金屬<br/>
                                 顏色：金
                             </div>
-                            <div class="d-flex">
-                                <select class="form-select form-select-lg fs-3 me-20" style="width: 110px;">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                                <button type="button" class="btn btn-lg btn-primary fs-3">加入購物車</button>
+                            <div class="row">
+                                <div class="col-xl-2 col-md-3 col-sm-3 col-5 pe-0">
+                                    <select class="form-select form-select-lg fs-3">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" class="btn btn-lg btn-primary fs-3">加入購物車</button>
+                                </div>
                             </div>
                             <hr class="my-50">
                             <div class="content">
@@ -138,44 +148,44 @@
                             </h2>
                             <div class="swiper cards cards-recommend">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide card card-verticle">
+                                    <div class="swiper-slide card card-vertical">
                                         <a href="product.html">
                                             <img src="https://dummyimage.com/600x400/eee/999" class="card-img img-fluid" alt="">
                                         </a>
                                         <div class="card-body mt-10 text-center">
-                                            <a href="products.html" class="d-block card-label fs-4">燈具照明</a>
+                                            <a href="products.html" class="d-block card-label fs-4 link-secondary">燈具照明</a>
                                             <a href="product.html" class="d-block card-title fs-3 fw-bold">Buendia 77 拱形弧形落地燈</a>
-                                            <div class="card-price fs-4 mt-10 mb-0">NT$6,300</div>
+                                            <div class="card-price fs-4 text-gray-300 mt-10 mb-0">NT$6,300</div>
                                         </div>
                                     </div>
-                                    <div class="swiper-slide card card-verticle">
+                                    <div class="swiper-slide card card-vertical">
                                         <a href="product.html">
                                             <img src="https://dummyimage.com/600x400/eee/999" class="card-img img-fluid" alt="">
                                         </a>
                                         <div class="card-body mt-10 text-center">
-                                            <a href="products.html" class="d-block card-label fs-4">燈具照明</a>
+                                            <a href="products.html" class="d-block card-label fs-4 link-secondary">燈具照明</a>
                                             <a href="product.html" class="d-block card-title fs-3 fw-bold">Buendia 77 拱形弧形落地燈</a>
-                                            <div class="card-price fs-4 mt-10 mb-0">NT$6,300</div>
+                                            <div class="card-price fs-4 text-gray-300 mt-10 mb-0">NT$6,300</div>
                                         </div>
                                     </div>
-                                    <div class="swiper-slide card card-verticle">
+                                    <div class="swiper-slide card card-vertical">
                                         <a href="product.html">
                                             <img src="https://dummyimage.com/600x400/eee/999" class="card-img img-fluid" alt="">
                                         </a>
                                         <div class="card-body mt-10 text-center">
-                                            <a href="products.html" class="d-block card-label fs-4">燈具照明</a>
+                                            <a href="products.html" class="d-block card-label fs-4 link-secondary">燈具照明</a>
                                             <a href="product.html" class="d-block card-title fs-3 fw-bold">Buendia 77 拱形弧形落地燈</a>
-                                            <div class="card-price fs-4 mt-10 mb-0">NT$6,300</div>
+                                            <div class="card-price fs-4 text-gray-300 mt-10 mb-0">NT$6,300</div>
                                         </div>
                                     </div>
-                                    <div class="swiper-slide card card-verticle">
+                                    <div class="swiper-slide card card-vertical">
                                         <a href="product.html">
                                             <img src="https://dummyimage.com/600x400/eee/999" class="card-img img-fluid" alt="">
                                         </a>
                                         <div class="card-body mt-10 text-center">
-                                            <a href="products.html" class="d-block card-label fs-4">燈具照明</a>
+                                            <a href="products.html" class="d-block card-label fs-4 link-secondary">燈具照明</a>
                                             <a href="product.html" class="d-block card-title fs-3 fw-bold">Buendia 77 拱形弧形落地燈</a>
-                                            <div class="card-price fs-4 mt-10 mb-0">NT$6,300</div>
+                                            <div class="card-price fs-4 text-gray-300 mt-10 mb-0">NT$6,300</div>
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +215,6 @@
     <script>
         var swiper = new Swiper(".cards-recommend", {
             slidesPerView: 1,
-            effect: "fade",
             pagination: {
                 el: ".swiper-pagination-recommend",
                 clickable: true,

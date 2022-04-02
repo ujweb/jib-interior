@@ -49,20 +49,54 @@
             }
         }
     }
+    &.cards-cart {
+        .card {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            + .card {
+                border-top: 1px solid $gray-100;
+            }
+            .card-img {
+                width: 160px;
+            }
+            .card-body {
+                display: flex;
+                flex-wrap: wrap;
+                width: calc(100% - 170px);
+                @include media-breakpoint-up(md) {
+                    flex-direction: row;
+                    align-items: center;
+                }
+                @include media-breakpoint-down(md) {
+                    flex-direction: column;
+                }
+                .card-text {
+                    @include media-breakpoint-up(md) {
+                        width: 220px;
+                    }
+                }
+            }
+        }
+    }
     .card {
         display: flex;
-        &.card-verticle {
+        align-items: center;
+        &.card-vertical {
             flex-direction: column;
+        }
+        &.card-horizontal {
+            flex-wrap: wrap;
         }
         .card-desc {
             display: flex;
             align-items: flex-start;
+            width: 100%;
             .desc-item {
                 flex: 1 0 0%;
                 flex-shrink: 0;
                 text-align: center;
                 + .desc-item {
-                    border-left: 1px solid #eee;
+                    border-left: 1px solid $gray-100;
                 }
             }
         }

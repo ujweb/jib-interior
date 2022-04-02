@@ -4,6 +4,7 @@
 @import "mixin";
 @import "bootstrap";
 @import "button";
+@import "link";
 
 html {
     min-height: 100%;
@@ -30,6 +31,7 @@ body {
 @import "card";
 @import "swiper";
 @import "breadcrumb";
+@import "step";
 
 main {
     .index-page & {
@@ -105,9 +107,11 @@ article {
 
 .col-sticky {
     > * {
-        position: sticky;
-        top: 100px;
-        left: 0;
+        @include media-breakpoint-up(md) {
+            position: sticky;
+            top: 100px;
+            left: 0;
+        }
     }
     > ul {
         @include list(0, 0, none);
@@ -138,7 +142,7 @@ article {
             align-items: flex-start;
             margin-bottom: 30px;
             padding-bottom: 30px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid $gray-100;
         }
         .desc-item {
             position: relative;
@@ -148,7 +152,7 @@ article {
             }
             @include media-breakpoint-down(md) {
                 &:nth-child(2n) {
-                    border-left: 1px solid #eee;
+                    border-left: 1px solid $gray-100;
                 }
                 &:nth-child(2) ~ .desc-item {
                     margin-top: 41px;
@@ -159,7 +163,7 @@ article {
                         left: 0;
                         width: 100%;
                         height: 1px;
-                        background-color: #eee;
+                        background-color: $gray-100;
                     }
                 }
             }
@@ -169,5 +173,12 @@ article {
                 }
             }
         }
+    }
+}
+
+.col-order {
+    .order-title {
+        width: 6em;
+        margin-right: 20px;
     }
 }

@@ -20,7 +20,7 @@ header {
     transition: margin 0.3s;
     .inner-page & {
         background-color: $white;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid $gray-100;
     }
     &.opened {
         margin-left: 200px;
@@ -42,6 +42,13 @@ header {
         img {
             display: block;
             margin-bottom: -15px;
+        }
+    }
+    .btn-cart {
+        .badge {
+            top: 0;
+            left: 100%;
+            transform: translate(-50%, -50%) scale(0.8);
         }
     }
     nav {

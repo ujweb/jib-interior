@@ -1,3 +1,10 @@
+:root {
+    --swiper-pagination-bullet-horizontal-gap: 5px;
+    --swiper-theme-color: #6B9362;
+    --swiper-pagination-bullet-inactive-color: #EBF1EA;
+    --swiper-pagination-bullet-inactive-opacity: 1;
+}
+
 .swiper {
     .swiper-next,
     .swiper-prev {

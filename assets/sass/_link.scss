@@ -1,0 +1,20 @@
+a {
+    &.link-black {
+        color: $black;
+        &:hover {
+            color: $primary;
+        }
+    }
+    &.link-primary {
+        color: $primary;
+        &:hover {
+            color: $rifle-green;
+        }
+    }
+    &.link-secondary {
+        color: $secondary;
+        &:hover {
+            color: $gold-fusion;
+        }
+    }
+}
