@@ -1,0 +1,16 @@
+.breadcrumb {
+    @include list(0, 0, none);
+    display: flex;
+    align-items: center;
+    li {
+        display: flex;
+        align-items: center;
+        font-size: $h4-font-size;
+        + li::before {
+            @include beforeafter('\e5cc', block);
+            padding: 0 5px;
+            font-family: 'Material Icons Outlined';
+            font-size: 1.125rem;
+        }
+    }
+}

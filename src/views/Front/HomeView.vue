@@ -1,0 +1,86 @@
+<template>
+  <section class="opening-index">
+    <swiper
+      :slides-per-view="1"
+      :loop="true"
+      :autoplay="{
+        enabled: true,
+        delay: 5000,
+        disableOnInteraction: false,
+      }"
+      :modules="[EffectFade]" effect="fade"
+      class="swiper-index h-100"
+    >
+      <swiper-slide>
+        <img src="https://images.unsplash.com/photo-1601628828688-632f38a5a7d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2018&q=80" alt="">
+        <div class="container h-100">
+          <div
+            class="row h-100 align-content-center justify-content-sm-start justify-content-center"
+          >
+            <div class="col-md-3 col-9">
+              <img src="@/assets/images/logo.svg" class="w-100 img-fluid" alt="">
+            </div>
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <img src="https://images.unsplash.com/photo-1601629077420-4b784a584094?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80" alt="">
+        <div class="container h-100">
+          <div
+            class="row h-100 align-content-center justify-content-sm-start justify-content-center"
+          >
+            <div class="col-md-3 col-9">
+              <img src="@/assets/images/logo.svg" class="w-100 img-fluid" alt="">
+            </div>
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <img src="https://images.unsplash.com/photo-1617978241112-898785df45b9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="">
+        <div class="container h-100">
+          <div
+            class="row h-100 align-content-center justify-content-sm-start justify-content-center"
+          >
+            <div class="col-md-3 col-9">
+              <img src="@/assets/images/logo.svg" class="w-100 img-fluid" alt="">
+            </div>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper>
+  </section>
+</template>
+
+<script>
+import SwiperCore, {
+  Autoplay, Pagination, EffectFade, Navigation, Thumbs,
+} from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+SwiperCore.use([Autoplay, Pagination, EffectFade, Navigation, Thumbs]);
+// import 'swiper/swiper.scss';
+
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    return {
+      EffectFade,
+      Autoplay,
+    };
+  },
+  mounted() {
+    this.$emitter.emit('page-loading', false);
+    document.body.classList.remove('index-page');
+    document.body.classList.add('index-page');
+    document.body.classList.remove('opened-nav');
+    document.body.classList.remove('inner-page');
+  },
+};
+</script>
+
+<style lang="scss">
+  @import "https://unpkg.com/swiper/swiper-bundle.min.css";
+</style>

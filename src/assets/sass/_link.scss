@@ -1,0 +1,26 @@
+a {
+    &.link-black {
+        color: $black;
+        &:hover {
+            color: $primary;
+        }
+    }
+    &.link-light {
+        color: $white;
+        &:hover {
+            color: $light-gray;
+        }
+    }
+    &.link-primary {
+        color: $primary;
+        &:hover {
+            color: $rifle-green;
+        }
+    }
+    &.link-secondary {
+        color: $secondary;
+        &:hover {
+            color: $gold-fusion;
+        }
+    }
+}

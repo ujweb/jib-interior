@@ -1,0 +1,109 @@
+.cards {
+    &.cards-team {
+        .card:nth-child(3) ~ .card {
+            @include media-breakpoint-up(md) {
+                @include media-breakpoint-down(lg) {
+                    margin-top: 40px;
+                }
+            }
+        }
+        .card:nth-child(4) ~ .card {
+            @include media-breakpoint-up(lg) {
+                margin-top: 40px;
+            }
+        }
+        .card:nth-child(2) ~ .card {
+            @include media-breakpoint-down(md) {
+                margin-top: 40px;
+            }
+        }
+    }
+    &.cards-works {
+        .card:nth-child(3) ~ .card {
+            @include media-breakpoint-up(md) {
+                margin-top: 40px;
+            }
+        }
+        .card + .card {
+            @include media-breakpoint-down(md) {
+                margin-top: 50px;
+            }
+        }
+    }
+    &.cards-products {
+        .card:nth-child(3) ~ .card {
+            @include media-breakpoint-up(md) {
+                @include media-breakpoint-down(xl) {
+                    margin-top: 40px;
+                }
+            }
+        }
+        .card:nth-child(4) ~ .card {
+            @include media-breakpoint-up(xl) {
+                margin-top: 40px;
+            }
+        }
+        .card:nth-child(2) ~ .card {
+            @include media-breakpoint-down(md) {
+                margin-top: 40px;
+            }
+        }
+    }
+    &.cards-cart {
+        .card {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            + .card {
+                border-top: 1px solid $gray-100;
+            }
+            .card-img {
+                width: 160px;
+            }
+            .card-body {
+                display: flex;
+                flex-wrap: wrap;
+                width: calc(100% - 170px);
+                @include media-breakpoint-up(md) {
+                    flex-direction: row;
+                    align-items: center;
+                }
+                @include media-breakpoint-down(md) {
+                    flex-direction: column;
+                }
+                .card-text {
+                    @include media-breakpoint-up(md) {
+                        width: 240px;
+                    }
+                }
+            }
+            .card-price {
+                @include media-breakpoint-up(md) {
+                    width: 80px;
+                }
+            }
+        }
+    }
+    .card {
+        display: flex;
+        align-items: center;
+        &.card-vertical {
+            flex-direction: column;
+        }
+        &.card-horizontal {
+            flex-wrap: wrap;
+        }
+        .card-desc {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            .desc-item {
+                flex: 1 0 0%;
+                flex-shrink: 0;
+                text-align: center;
+                + .desc-item {
+                    border-left: 1px solid $gray-100;
+                }
+            }
+        }
+    }
+}

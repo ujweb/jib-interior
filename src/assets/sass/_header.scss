@@ -1,0 +1,99 @@
+@mixin navToggle {
+    position: fixed;
+    top: 0;
+    left: -200px;
+    width: 200px;
+    height: 100%;
+    transition: left 0.3s;
+    @at-root {
+        .opened-nav#{&} {
+            left: 0;
+        }
+    }
+}
+  
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 7px 0;
+    z-index: 2;
+    transition: margin 0.3s;
+    .inner-page & {
+        background-color: $white;
+        border-bottom: 1px solid $gray-100;
+    }
+    .opened-nav & {
+        margin-left: 200px;
+    }
+    .hamburger {
+        .inner-page & {
+            @include media-breakpoint-up(md) {
+                display: none;
+            }
+        }
+    }
+    a.logo {
+        display: block;
+        .index-page & {
+            display: none;
+        }
+        .inner-page & {
+            @include media-breakpoint-up(md) {
+                margin-left: 20px;
+            }
+        }
+        img {
+            display: block;
+            margin-bottom: -15px;
+        }
+    }
+    .btn-cart {
+        .badge {
+            top: 0;
+            left: 100%;
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+    }
+    nav {
+        .index-page & {
+            @include navToggle;
+        }
+        .inner-page & {
+            @include media-breakpoint-down(md) {
+                @include navToggle;
+            }
+        }
+        ul {
+            @include list(0, 0, none);
+            li {
+                @include media-breakpoint-up(md) {
+                    .index-page & {
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                    }
+                    .inner-page & {
+                        margin-left: 20px;
+                        margin-right: 20px;
+                    }
+                }
+                @include media-breakpoint-down(md) {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                }
+            }
+            .index-page & {
+                padding: 100px 40px;
+            }
+            .inner-page & {
+                @include media-breakpoint-up(md) {
+                    display: flex;
+                }
+                @include media-breakpoint-down(md) {
+                    padding: 100px 40px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600&family=Roboto:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+@import "mixin";
+@import "bootstrap";
+@import "button";
+@import "link";
+
+html {
+    min-height: 100%;
+    height: 100%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Roboto', 'Noto Sans TC', sans-serif;
+    overflow-x: hidden;
+    &.index-page {
+        min-height: 100%;
+        height: 100%;
+        #app {
+            min-height: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.serif {
+    font-family: 'Noto Serif TC', '思源宋體 TC', '思源宋體 TW', '思源宋體', serif;
+}
+
+@import "header";
+@import "footer";
+@import "card";
+@import "swiper";
+@import "breadcrumb";
+@import "step";
+@import "toggle";
+
+main {
+    .index-page & {
+        min-height: 100%;
+        height: 100%;
+        overflow-x: hidden;
+    }
+    .inner-page & {
+        padding-top: 80px;
+    }
+}
+
+article {
+    margin-top: 80px;
+    .content {
+        > *:first-child {
+            margin-top: 0;
+        }
+        > h2 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        > p {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.opening-index {
+    min-height: 100%;
+    height: 100%;
+    transition: transform 0.3s;
+    .opened-nav & {
+        transform: translateX(200px);
+    }
+    .container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+    .swiper-slide {
+        position: relative;
+        > img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.opening-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+}
+
+.col-sticky {
+    > * {
+        @include media-breakpoint-up(md) {
+            position: sticky;
+            top: 100px;
+            left: 0;
+        }
+    }
+    > ul {
+        @include list(0, 0, none);
+        @include media-breakpoint-down(md) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        li {
+            + li {
+                @include media-breakpoint-up(md) {
+                    margin-top: 20px;
+                }
+                @include media-breakpoint-down(md) {
+                    margin-left: 20px;
+                }
+            }
+        }
+        a {
+            display: table;
+        }
+    }
+    > .desc-group {
+        @include media-breakpoint-down(md) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid $gray-100;
+        }
+        .desc-item {
+            position: relative;
+            @include media-breakpoint-down(md) {
+                width: 50%;
+                text-align: center;
+            }
+            @include media-breakpoint-down(md) {
+                &:nth-child(2n) {
+                    border-left: 1px solid $gray-100;
+                }
+                &:nth-child(2) ~ .desc-item {
+                    margin-top: 41px;
+                    &::before {
+                        @include beforeafter('',  block);
+                        position: absolute;
+                        top: -21px;
+                        left: 0;
+                        width: 100%;
+                        height: 1px;
+                        background-color: $gray-100;
+                    }
+                }
+            }
+            + .desc-item {
+                @include media-breakpoint-up(md) {
+                    margin-top: 40px;
+                }
+            }
+        }
+    }
+}
+
+.col-order {
+    .order-title {
+        width: 6em;
+        margin-right: 20px;
+    }
+}
