@@ -68,9 +68,9 @@
               <input
                 id="coupon"
                 type="text"
-                class="form-control form-control-lg fs-3"
+                class="form-control form-control-lg fs-3 bg-white"
                 :readonly="provideCart.total !== provideCart.final_total"
-                :placeholder="(provideCart.total !== provideCart.final_total) ? '套用優惠券' : '您已套用優惠券'"
+                :placeholder="(provideCart.total !== provideCart.final_total) ? '您已套用優惠券' : '套用優惠券'"
                 v-model="code"
               >
               <button

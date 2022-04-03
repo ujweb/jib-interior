@@ -318,7 +318,7 @@ export default {
 
       this.$http.post(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`, formData)
         .then((response) => {
-          // console.log(response.data.imageUrl);
+          console.log(response.data.imageUrl);
           this.data.img = response.data.imageUrl;
         })
         .catch((error) => {

@@ -10,7 +10,7 @@
           class="col-md-4 card card-vertical"
           v-for="work in works" :key="work.id"
         >
-          <router-link :to="`/work/${work.id}`">
+          <router-link class="ratio ratio-3x2" :to="`/work/${work.id}`">
             <img :src="work.img" class="card-img img-fluid" :alt="work.title">
             <span class="visually-hidden">{{ work.title }}</span>
           </router-link>

@@ -187,3 +187,9 @@ article {
         margin-right: 20px;
     }
 }
+
+.ratio {
+    > img {
+        object-fit: cover;
+    }
+}

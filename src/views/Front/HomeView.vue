@@ -12,7 +12,7 @@
       class="swiper-index h-100"
     >
       <swiper-slide>
-        <img src="https://images.unsplash.com/photo-1601628828688-632f38a5a7d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2018&q=80" alt="">
+        <img src="../../../public/images/index/promote-1.png" alt="">
         <div class="container h-100">
           <div
             class="row h-100 align-content-center justify-content-sm-start justify-content-center"
@@ -24,7 +24,7 @@
         </div>
       </swiper-slide>
       <swiper-slide>
-        <img src="https://images.unsplash.com/photo-1601629077420-4b784a584094?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80" alt="">
+        <img src="../../../public/images/index/promote-2.png" alt="">
         <div class="container h-100">
           <div
             class="row h-100 align-content-center justify-content-sm-start justify-content-center"
@@ -36,7 +36,7 @@
         </div>
       </swiper-slide>
       <swiper-slide>
-        <img src="https://images.unsplash.com/photo-1617978241112-898785df45b9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="">
+        <img src="../../../public/images/index/promote-3.png" alt="">
         <div class="container h-100">
           <div
             class="row h-100 align-content-center justify-content-sm-start justify-content-center"

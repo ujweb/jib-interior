@@ -92,6 +92,12 @@ export default {
         });
     },
   },
+  watch: {
+    $route(to) {
+      const currentTitle = to.meta.title || '';
+      document.title = `${currentTitle} | Jib Interior Studio`;
+    },
+  },
 };
 </script>
 

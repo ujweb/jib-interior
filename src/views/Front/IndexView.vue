@@ -111,6 +111,16 @@ export default {
         });
     },
   },
+  watch: {
+    $route(to) {
+      const currentTitle = to.meta.title || '';
+      if (currentTitle === '首頁') {
+        document.title = 'Jib Interior Studio';
+      } else {
+        document.title = `${currentTitle} | Jib Interior Studio`;
+      }
+    },
+  },
   unmounted() {
     this.$emitter.off('add-cart');
     this.$emitter.off('get-cart');
