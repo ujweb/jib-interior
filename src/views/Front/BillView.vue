@@ -32,12 +32,19 @@
                 :key="product.id"
               >
                 <router-link :to="`/product/${product.product.id}`" class="card-img me-10">
-                  <img :src="`${product.product.imageUrl}`" class="img-fluid" alt="">
+                  <img
+                    :src="`${product.product.imageUrl}`"
+                    class="img-fluid"
+                    :alt="`${product.product.title} 產品圖`"
+                  >
                   <span class="visually-hidden">{{ product.product.title }}</span>
                 </router-link>
                 <div class="card-body">
                   <div class="card-text me-md-20">
-                    <router-link to="/products" class="d-block card-label fs-4 link-secondary">
+                    <router-link
+                      :to="`/products?category=${product.product.category}`"
+                      class="d-block card-label fs-4 link-secondary"
+                    >
                       {{ product.product.category }}
                     </router-link>
                     <router-link

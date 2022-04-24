@@ -2,7 +2,7 @@
   <PageLoading />
   <header-component @emit-toggle-nav="openNavigation" />
   <main>
-    <router-view
+    <RouterView
       @get-cart="getCart"
     />
   </main>
@@ -94,7 +94,6 @@ export default {
           qty,
         },
       };
-      this.isDisabled = item.id;
       // console.log(cartUrl, data);
       this.$http.post(cartUrl, data)
         .then((response) => {
@@ -102,27 +101,19 @@ export default {
           this.modal.title = response.data.message;
           this.modal.content = `已將${response.data.data.product.title}加入購物車`;
           this.openSuccessModal();
+          this.$emitter.emit('page-loading', false);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          // console.log(error);
         })
         .finally(() => {
           this.$emitter.emit('page-loading', false);
         });
     },
   },
-  watch: {
-    $route(to) {
-      const currentTitle = to.meta.title || '';
-      if (currentTitle === '首頁') {
-        document.title = 'Jib Interior Studio';
-      } else {
-        document.title = `${currentTitle} | Jib Interior Studio`;
-      }
-    },
-  },
   unmounted() {
     this.$emitter.off('add-cart');
+    this.$emitter.off('sending-sate');
     this.$emitter.off('get-cart');
   },
 };

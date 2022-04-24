@@ -35,6 +35,7 @@
                 class="form-check-input"
                 :class="{'checked': product.is_enabled == 1}"
                 @click="toggleEnabled(product);"
+                type="button"
               ></button>
             </div>
           </td>
@@ -137,7 +138,7 @@ export default {
           this.$emitter.emit('page-loading', false);
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           alert(error.response.data.message);
         });
     },
@@ -167,7 +168,7 @@ export default {
           this.modal.temp = {};
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           if (type === '新增產品') {
             this.modal.title = '新增失敗';
           } else if (type === '編輯產品') {
@@ -191,7 +192,7 @@ export default {
           this.getProduct();
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           this.modal.title = '刪除失敗';
           this.modal.content = error.response.data.message;
         })
@@ -221,7 +222,7 @@ export default {
           this.getProduct();
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           this.modal.title = '修改失敗';
           this.modal.content = error.response.data.message;
         })

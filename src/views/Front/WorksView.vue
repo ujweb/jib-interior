@@ -1,6 +1,9 @@
 <template>
+  <div class="discount-block bg-bright-gray px-20 py-10 fs-4 lh-1 text-center">
+    結帳輸入 HBD2022，享有週年慶九折優惠
+  </div>
   <section class="opening-inner">
-    <img src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80" alt="">
+    <img src="../../../public/kv-works.jpg" alt="設計作品 示意圖">
     <h1 class="mb-0 serif">設計作品</h1>
   </section>
   <section class="pt-50">
@@ -50,10 +53,10 @@ export default {
       works: [],
     };
   },
-  emits: ['page-loading'],
+  emits: ['page-loading', 'get-cart'],
   components: {},
   mounted() {
-    this.$emitter.emit('page-loading', false);
+    this.$emitter.emit('page-loading', true);
     document.body.classList.add('index-page');
     document.body.classList.remove('index-page');
     document.body.classList.remove('opened-nav');

@@ -146,7 +146,7 @@ export default {
           this.orders = response.data.orders;
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           alert(error.response.data.message);
         });
     },

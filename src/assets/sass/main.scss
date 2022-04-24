@@ -46,6 +46,18 @@ main {
     }
     .inner-page & {
         padding-top: 80px;
+        @include media-breakpoint-down(md) {
+            overflow-x: hidden;
+            > * {
+                transition: transform 0.3s;
+                @at-root {
+                    .opened-nav#{&} {
+                        transform: translateX(200px);
+                        background-color: $bright-gray;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -62,33 +74,6 @@ article {
         > p {
             margin-top: 20px;
             margin-bottom: 20px;
-        }
-    }
-}
-
-.opening-index {
-    min-height: 100%;
-    height: 100%;
-    transition: transform 0.3s;
-    .opened-nav & {
-        transform: translateX(200px);
-    }
-    .container {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
-    }
-    .swiper-slide {
-        position: relative;
-        > img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
     }
 }
@@ -138,6 +123,9 @@ article {
         }
         a {
             display: table;
+            &.router-link-exact-active {
+                color: $russian-green;
+            }
         }
     }
     > .desc-group {

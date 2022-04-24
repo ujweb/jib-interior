@@ -47,7 +47,7 @@
       </div>
       </aside>
       <div class="content-wrapper p-20">
-        <router-view v-if="checkAccount" />
+        <RouterView v-if="checkAccount" />
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@ export default {
           this.checkAccount = true;
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           alert(error.response.data.message);
           this.$router.push('/login');
         });
@@ -82,12 +82,11 @@ export default {
     logout() {
       const logoutUrl = `${process.env.VUE_APP_API}/logout`;
       this.$http.post(logoutUrl)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           this.$router.push('/login'); // 登出成功後返回登入首頁
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           alert(error.response.data.message);
         });
     },

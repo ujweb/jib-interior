@@ -116,6 +116,12 @@ const routes = [
       },
     }],
   },
+  // error
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: () => import('../views/ErrorView.vue'),
+  },
 ];
 
 const router = createRouter({

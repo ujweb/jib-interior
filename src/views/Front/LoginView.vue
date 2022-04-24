@@ -49,6 +49,7 @@
 export default {
   data() {
     return {
+      error: '',
       user: {
         username: '',
         password: '',
@@ -70,6 +71,8 @@ export default {
         })
         .catch((error) => {
           // console.dir(error);
+          this.user.username = '';
+          this.user.password = '';
           this.error = error.response.data.error.message;
         });
     },
@@ -94,7 +97,7 @@ export default {
   @import "src/assets/sass/variables";
   @import "~bootstrap/scss/mixins";
   .container-fluid {
-    background-image: url('../../../public/sam-chang-L6xHmv2R3G4-unsplash.jpg');
+    background-image: url('../../../public/kv-login.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

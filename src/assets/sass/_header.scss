@@ -5,10 +5,8 @@
     width: 200px;
     height: 100%;
     transition: left 0.3s;
-    @at-root {
-        .opened-nav#{&} {
-            left: 0;
-        }
+    .opened-nav & {
+        left: 0;
     }
 }
   
@@ -28,10 +26,8 @@ header {
         margin-left: 200px;
     }
     .hamburger {
-        .inner-page & {
-            @include media-breakpoint-up(md) {
-                display: none;
-            }
+        @include media-breakpoint-up(md) {
+            display: none;
         }
     }
     a.logo {
@@ -57,43 +53,31 @@ header {
         }
     }
     nav {
-        .index-page & {
+        @include media-breakpoint-down(md) {
             @include navToggle;
-        }
-        .inner-page & {
-            @include media-breakpoint-down(md) {
-                @include navToggle;
-            }
         }
         ul {
             @include list(0, 0, none);
             li {
                 @include media-breakpoint-up(md) {
-                    .index-page & {
-                        margin-top: 20px;
-                        margin-bottom: 20px;
-                    }
-                    .inner-page & {
-                        margin-left: 20px;
-                        margin-right: 20px;
-                    }
+                    margin-left: 20px;
+                    margin-right: 20px;
                 }
                 @include media-breakpoint-down(md) {
                     margin-top: 20px;
                     margin-bottom: 20px;
                 }
             }
-            .index-page & {
-                padding: 100px 40px;
+            @include media-breakpoint-up(md) {
+                display: flex;
             }
-            .inner-page & {
-                @include media-breakpoint-up(md) {
-                    display: flex;
-                }
-                @include media-breakpoint-down(md) {
-                    padding: 100px 40px;
-                }
+            @include media-breakpoint-down(md) {
+                padding: 100px 40px;
             }
         }
     }
+}
+
+.index-page .discount-block {
+    display: none;
 }

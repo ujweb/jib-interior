@@ -125,7 +125,7 @@ $escaped-characters: (
 // Quickly modify global styling by enabling or disabling optional features.
 
 $enable-caret:                true !default;
-$enable-rounded:              true !default;
+$enable-rounded:              false !default;
 $enable-shadows:              false !default;
 $enable-gradients:            false !default;
 $enable-transitions:          true !default;
@@ -191,7 +191,7 @@ $position-values: (
 // Settings for the `<body>` element.
 
 $body-bg:                   $white !default;
-$body-color:                $gray-500 !default;
+$body-color:                darken($rifle-green, 10%) !default;
 $body-text-align:           null !default;
 
 // Utilities maps
@@ -231,7 +231,7 @@ $utilities-bg-colors: map-loop($utilities-bg, rgba-css-var, "$key", "bg") !defau
 //
 // Style anchor elements.
 
-$link-color:                              $black !default;
+$link-color:                              $body-color !default;
 $link-decoration:                         none !default;
 $link-shade-percentage:                   20% !default;
 $link-hover-color:                        $primary !default;

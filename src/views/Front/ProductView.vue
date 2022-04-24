@@ -1,5 +1,8 @@
 <template>
-  <section class="pt-50">
+  <div class="discount-block bg-bright-gray px-20 py-10 fs-4 lh-1 text-center">
+    結帳輸入 HBD2022，享有週年慶九折優惠
+  </div>
+  <section class="pt-50" :class="{'opacity-0': loading}">
     <div class="container">
       <article class="mt-0">
         <div class="row">
@@ -7,14 +10,16 @@
             <div class="d-md-none">
               <ul class="breadcrumb">
                 <li>
-                  <router-link to="/products">家具選購</router-link>
+                  <router-link to="/products?category=all">家具選購</router-link>
                 </li>
                 <li>
-                  <router-link to="/products">燈具照明</router-link>
+                  <router-link :to="`/products?category=${product.category}&page=1`">
+                    {{ product.category }}
+                  </router-link>
                 </li>
               </ul>
-              <h1 class="mt-10 mb-0">Buendia 77 拱形弧形落地燈</h1>
-              <div class="fs-1 mb-0">NT$6,300</div>
+              <h1 class="mt-10 mb-0">{{ product.title }}</h1>
+              <div class="fs-1 mb-0">NT${{Number(product.price).toLocaleString()}}</div>
             </div>
             <div class="swiper-group">
               <swiper
@@ -37,10 +42,14 @@
                 class="product-imgs"
               >
                 <swiper-slide>
-                  <img :src="product.imageUrl" class="img-fluid w-100" alt="">
+                  <img :src="product.imageUrl" class="img-fluid w-100" alt="產品主圖">
                 </swiper-slide>
                 <swiper-slide v-for="(imgUrl, index) in product.imagesUrl" :key="index">
-                  <img :src="imgUrl" class="img-fluid w-100" alt="">
+                  <img
+                    :src="imgUrl"
+                    class="img-fluid w-100"
+                    :alt="`產品配圖-${index}`"
+                  >
                 </swiper-slide>
                 <div class="swiper-next swiper-next-product">
                   <span class="material-icons-outlined">chevron_right</span>
@@ -57,16 +66,18 @@
             <div class="d-md-block d-none">
               <ul class="breadcrumb">
                 <li>
-                  <router-link to="/products">家具選購</router-link>
+                  <router-link to="/products?category=all">家具選購</router-link>
                 </li>
                 <li>
-                  <router-link to="/products">{{ product.category }}</router-link>
+                  <router-link :to="`/products?category=${product.category}&page=1`">
+                    {{ product.category }}
+                  </router-link>
                 </li>
               </ul>
               <h1 class="mt-10 mb-0">{{ product.title }}</h1>
-              <div class="fs-1 mb-0">NT${{product.price}}</div>
+              <div class="fs-1 mb-0">NT${{ toNumber(product.price) }}</div>
             </div>
-            <div class="text-gray-400 my-20">
+            <div class="pre-wrap text-gray-400 my-20">
               {{product.description}}
             </div>
             <div class="row">
@@ -88,17 +99,26 @@
                 <button
                   type="button"
                   class="btn btn-lg btn-primary fs-3"
+                  :disabled="cartState"
                   @click="addToCart(product, cart.qty)"
-                >加入購物車</button>
+                >
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    v-if="cartState"
+                    aria-hidden="true"
+                  ></span>
+                  加入購物車
+                </button>
               </div>
             </div>
             <hr class="my-50">
             <div class="content">
-              <h3 class="mb-10">產品詳細信息</h3>
-              <p class="my-10">
+              <h3 class="mb-10">產品詳細訊息</h3>
+              <p class="my-10 pre-wrap">
                 {{ product.content }}
               </p>
-              <h3 class="mt-50 mb-10">產品詳細信息</h3>
+              <h3 class="mt-50 mb-10">Jib 購買訊息</h3>
               <p>
                 使用 Jib 為您的家具提供更優惠的價格，我們也不會將任何多於費用轉嫁給您。
                 如果您在其他家具網站上找到更優惠的價格，請告訴我們，我們會為您比價，確認後若你立即購買，即享 9 折優惠。
@@ -116,7 +136,7 @@
               </p>
             </div>
           </div>
-          <div class="recommend col-12 pt-md-50">
+          <div class="recommend col-12 pt-md-50" v-if="recommends.length > 0">
             <hr class="my-50">
             <h2 class="mb-20">
               推薦商品
@@ -150,8 +170,11 @@
                   <span class="visually-hidden">{{ recommend.title }}</span>
                 </router-link>
                 <div class="card-body mt-10 text-center">
-                  <router-link to="/products" class="d-block card-label fs-4 link-secondary">
-                    燈具照明
+                  <router-link
+                    :to="`/products?category=${product.category}&page=1`"
+                    class="d-block card-label fs-4 link-secondary"
+                  >
+                    {{ recommend.category }}
                   </router-link>
                   <router-link
                     :to="`/product/${recommend.id}`"
@@ -160,7 +183,7 @@
                     {{ recommend.title }}
                   </router-link>
                   <div class="card-price fs-4 text-gray-300 mt-10 mb-0">
-                    NT${{ recommend.price }}
+                    NT${{ toNumber(recommend.price) }}
                   </div>
                 </div>
               </swiper-slide>
@@ -192,6 +215,8 @@ SwiperCore.use([Autoplay, Pagination, EffectFade, Navigation, Thumbs]);
 export default {
   data() {
     return {
+      loading: true,
+      cartState: false,
       products: [],
       product: {},
       recommends: [],
@@ -200,7 +225,8 @@ export default {
       },
     };
   },
-  emits: ['page-loading', 'add-cart'],
+  emits: ['page-loading', 'get-cart', 'add-cart', 'toggle-spinner'],
+  inject: ['routerRefresh'],
   components: {
     Swiper,
     SwiperSlide,
@@ -220,7 +246,7 @@ export default {
     };
   },
   mounted() {
-    this.$emitter.emit('page-loading', false);
+    this.$emitter.emit('page-loading', true);
     document.body.classList.add('index-page');
     document.body.classList.remove('index-page');
     document.body.classList.remove('opened-nav');
@@ -234,6 +260,7 @@ export default {
         .then((response) => {
           // console.log(response);
           this.$emitter.emit('page-loading', false);
+          this.loading = false;
           this.product = response.data.product;
           this.filterRecommend();
         });
@@ -245,8 +272,8 @@ export default {
           this.products = response.data.products.reverse();
           this.getProduct();
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          // console.log(error);
           this.$emitter.emit('page-loading', false);
         });
     },
@@ -267,7 +294,19 @@ export default {
       });
     },
     addToCart(item, qty = 1) {
+      // console.log(item, qty);
+      this.$emitter.emit('page-loading', true);
       this.$emitter.emit('add-cart', { item, qty });
+    },
+    toNumber(val) {
+      return Number.parseInt(val, 10).toLocaleString();
+    },
+  },
+  watch: {
+    $route: {
+      handler() {
+        this.routerRefresh();
+      },
     },
   },
 };
@@ -275,4 +314,13 @@ export default {
 
 <style lang="scss">
   @import "https://unpkg.com/swiper/swiper-bundle.min.css";
+</style>
+
+<style lang="scss" scope>
+  section {
+    transition: opacity 0.3s;
+  }
+  .pre-wrap {
+    white-space: pre-wrap;
+  }
 </style>

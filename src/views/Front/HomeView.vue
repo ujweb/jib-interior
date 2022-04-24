@@ -12,37 +12,37 @@
       class="swiper-index h-100"
     >
       <swiper-slide>
-        <img src="../../../public/images/index/promote-1.png" alt="">
+        <img src="../../../public/images/index/promote-1.png" alt="裝潢渲染圖1">
         <div class="container h-100">
           <div
             class="row h-100 align-content-center justify-content-sm-start justify-content-center"
           >
             <div class="col-md-3 col-9">
-              <img src="@/assets/images/logo.svg" class="w-100 img-fluid" alt="">
+              <img src="@/assets/images/logo.svg" class="w-100 img-fluid" alt="Jib Interior Logo">
             </div>
           </div>
         </div>
       </swiper-slide>
       <swiper-slide>
-        <img src="../../../public/images/index/promote-2.png" alt="">
+        <img src="../../../public/images/index/promote-2.png" alt="裝潢渲染圖2">
         <div class="container h-100">
           <div
             class="row h-100 align-content-center justify-content-sm-start justify-content-center"
           >
             <div class="col-md-3 col-9">
-              <img src="@/assets/images/logo.svg" class="w-100 img-fluid" alt="">
+              <img src="@/assets/images/logo.svg" class="w-100 img-fluid" alt="Jib Interior Logo">
             </div>
           </div>
         </div>
       </swiper-slide>
       <swiper-slide>
-        <img src="../../../public/images/index/promote-3.png" alt="">
+        <img src="../../../public/images/index/promote-3.png" alt="裝潢渲染圖3">
         <div class="container h-100">
           <div
             class="row h-100 align-content-center justify-content-sm-start justify-content-center"
           >
             <div class="col-md-3 col-9">
-              <img src="@/assets/images/logo.svg" class="w-100 img-fluid" alt="">
+              <img src="@/assets/images/logo.svg" class="w-100 img-fluid" alt="Jib Interior Logo">
             </div>
           </div>
         </div>
@@ -83,4 +83,33 @@ export default {
 
 <style lang="scss">
   @import "https://unpkg.com/swiper/swiper-bundle.min.css";
+</style>
+
+<style lang="scss" scoped>
+  .opening-index {
+    min-height: 100%;
+    height: 100%;
+    transition: transform 0.3s;
+    .opened-nav & {
+      transform: translateX(200px);
+    }
+    .container {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+    .swiper-slide {
+      position: relative;
+      > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
 </style>

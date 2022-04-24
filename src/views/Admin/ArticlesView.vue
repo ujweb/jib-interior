@@ -34,6 +34,7 @@
                   <button
                     class="form-check-input"
                     :class="{'checked': article.isPublic}"
+                    type="button"
                     @click="togglePublic(article);"
                   ></button>
                 </div>
@@ -122,9 +123,8 @@ export default {
           this.$emitter.emit('page-loading', false);
           this.articles = response.data.articles;
           this.paginations = response.data.pagination;
-        }).catch((error) => {
+        }).catch(() => {
           this.$emitter.emit('page-loading', false);
-          console.log(error);
         });
     },
     updateArticle(article) {
@@ -156,7 +156,7 @@ export default {
           this.modal.temp = {};
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           if (type === '新增文章') {
             this.modal.title = '新增失敗';
           } else if (type === '編輯文章') {
@@ -194,7 +194,7 @@ export default {
               this.modal.content = response.data.message;
             })
             .catch((error) => {
-              console.dir(error);
+              // console.dir(error);
               this.modal.title = '修改失敗';
               this.modal.content = error.response.data.message;
             })
@@ -203,8 +203,8 @@ export default {
               this.openSuccessModal(this.modal.title, this.modal.content);
             });
         })
-        .catch((error) => {
-          console.dir(error);
+        .catch(() => {
+          // console.dir(error);
         });
     },
     deleteArticle(article) {

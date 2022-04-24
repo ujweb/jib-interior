@@ -2,7 +2,7 @@
   <section class="opening-about mt-md-40">
     <div class="container position-relative px-md-20 px-0">
       <div class="ratio ratio-2x1">
-        <img src="https://storage.googleapis.com/vue-course-api.appspot.com/ujhwang/1648997728155.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=NI1w6UrLtFFNh0eL%2FWnQgB4XqhFF5bvGXh%2B4XrP%2BkshDk2ztiMi%2BkiPjaUPprHmimEbLP41PBBMXwcHDRxEZCD0Z9i3A%2Bs28DrQO1GqABZthiJkikS1%2B%2B7TRME6FMiic2UixkNFSl8eFgUgy1GlNBglRuTuNCDmjDhmCZk%2Fzp3GeelTVCS%2FlD%2BrXeAwLtvXHZq%2BQz2pxMNn38I2xM1qoRC16QKgy4SUjphJmqcHIuGkDkSveZ1pXga3%2B3XId1KBphkVbjAqMEgwGAxSYmYq%2Bx%2FbODbNPOyVcTjLNtk8Qwv9bitA%2BO%2FRRTdRb8%2FCZIlI%2BgK7osq35hRXiN4i6kKLKjA%3D%3D" alt="">
+        <img src="https://storage.googleapis.com/vue-course-api.appspot.com/ujhwang/1648997728155.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=NI1w6UrLtFFNh0eL%2FWnQgB4XqhFF5bvGXh%2B4XrP%2BkshDk2ztiMi%2BkiPjaUPprHmimEbLP41PBBMXwcHDRxEZCD0Z9i3A%2Bs28DrQO1GqABZthiJkikS1%2B%2B7TRME6FMiic2UixkNFSl8eFgUgy1GlNBglRuTuNCDmjDhmCZk%2Fzp3GeelTVCS%2FlD%2BrXeAwLtvXHZq%2BQz2pxMNn38I2xM1qoRC16QKgy4SUjphJmqcHIuGkDkSveZ1pXga3%2B3XId1KBphkVbjAqMEgwGAxSYmYq%2Bx%2FbODbNPOyVcTjLNtk8Qwv9bitA%2BO%2FRRTdRb8%2FCZIlI%2BgK7osq35hRXiN4i6kKLKjA%3D%3D" alt="關於我們 示意圖">
       </div>
       <div class="position-absolute start-0 top-50 translate-middle-y w-100">
         <div class="col-md-6 offset-md-6">
@@ -97,6 +97,7 @@
             <button
               type="submit"
               class="btn btn-lg btn-primary fs-3 w-100"
+              :disabled="!form.name || !form.phone || !form.email || !form.ask || !form.check"
               @click="responseForm"
             >確認送出</button>
             <div class="text-danger text-center mt-10" v-if="sentForm">
@@ -129,6 +130,7 @@ export default {
   components: {
     AboutNav,
   },
+  emits: ['page-loading', 'get-cart'],
   mounted() {
     this.$emitter.emit('page-loading', false);
     document.body.classList.add('index-page');

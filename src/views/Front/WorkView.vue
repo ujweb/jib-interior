@@ -1,4 +1,7 @@
 <template>
+  <div class="discount-block bg-bright-gray px-20 py-10 fs-4 lh-1 text-center">
+    結帳輸入 HBD2022，享有週年慶九折優惠
+  </div>
   <section class="pt-md-50 pt-30">
     <div class="container">
       <h1 class="mb-md-50 mb-30 text-center">
@@ -62,11 +65,18 @@
                   v-for="recommend in recommends" :key="recommend.id"
                 >
                   <router-link :to="`/product/${recommend.id}`">
-                    <img :src="recommend.imageUrl" class="card-img img-fluid" alt="">
+                    <img
+                      :src="recommend.imageUrl"
+                      class="card-img img-fluid"
+                      :alt="`${recommend.title} 產品圖`"
+                    >
                     <span class="visually-hidden">{{ recommend.title }}</span>
                   </router-link>
                   <div class="card-body mt-10 text-center">
-                    <router-link to="/products" class="d-block card-label fs-4 link-secondary">
+                    <router-link
+                      :to="`/products?category=${recommend.category}`"
+                      class="d-block card-label fs-4 link-secondary"
+                    >
                       {{ recommend.category }}
                     </router-link>
                     <router-link
@@ -76,7 +86,7 @@
                       {{ recommend.title }}
                     </router-link>
                     <div class="card-price fs-4 text-gray-300 mt-10 mb-0">
-                      NT${{ recommend.price }}
+                      NT${{ recommend.price.toLocaleString() }}
                     </div>
                   </div>
                 </swiper-slide>
@@ -112,7 +122,7 @@ export default {
       recommends: [],
     };
   },
-  emits: ['page-loading'],
+  emits: ['page-loading', 'get-cart'],
   components: {
     Swiper,
     SwiperSlide,
@@ -125,7 +135,7 @@ export default {
     };
   },
   mounted() {
-    this.$emitter.emit('page-loading', false);
+    this.$emitter.emit('page-loading', true);
     document.body.classList.add('index-page');
     document.body.classList.remove('index-page');
     document.body.classList.remove('opened-nav');
@@ -138,6 +148,7 @@ export default {
       this.$http.get(getWorkApi)
         .then((response) => {
           // console.log(response);
+          this.$emitter.emit('page-loading', false);
           this.work = response.data.article;
           if (this.work.recommend.length > 0) {
             this.work.recommend.forEach((item) => {
@@ -154,11 +165,23 @@ export default {
           this.recommends.push(response.data.product);
         });
     },
-
   },
 };
 </script>
 
 <style lang="scss">
   @import "https://unpkg.com/swiper/swiper-bundle.min.css";
+</style>
+
+<style lang="scss" scoped>
+  @import "~bootstrap/scss/functions";
+  @import "src/assets/sass/variables";
+  @import "~bootstrap/scss/mixins";
+  @import "src/assets/sass/mixin";
+  .swiper-slide {
+    @include media-breakpoint-down(md) {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
 </style>

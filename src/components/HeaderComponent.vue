@@ -18,7 +18,7 @@
             <router-link to="/works">設計作品</router-link>
           </li>
           <li>
-            <router-link to="/products">家具選購</router-link>
+            <router-link to="/products?category=all">家具選購</router-link>
           </li>
           <li>
             <router-link to="/contact" class="btn btn-outline-primary">預約諮詢</router-link>
@@ -46,3 +46,11 @@ export default {
   inject: ['provideCart'],
 };
 </script>
+
+<style lang="scss" scoped>
+  @import "~bootstrap/scss/functions";
+  @import "src/assets/sass/variables";
+  a.router-link-active {
+    color: $russian-green;
+  }
+</style>

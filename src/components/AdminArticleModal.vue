@@ -41,6 +41,7 @@
                     <input class="form-control" id="date" :value="inputValue" />
                     <button
                       class="btn btn-sm btn-outline-primary"
+                      type="button"
                       @click="togglePopover()"
                     >
                       <span class="material-icons-outlined d-block fs-6">calendar_today</span>
@@ -318,11 +319,11 @@ export default {
 
       this.$http.post(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`, formData)
         .then((response) => {
-          console.log(response.data.imageUrl);
+          // console.log(response.data.imageUrl);
           this.data.img = response.data.imageUrl;
         })
-        .catch((error) => {
-          console.dir(error);
+        .catch(() => {
+          // console.dir(error);
         });
     },
   },

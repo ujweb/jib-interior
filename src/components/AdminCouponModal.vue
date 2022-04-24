@@ -71,6 +71,7 @@
                         />
                         <button
                           class="btn btn-sm btn-outline-secondary"
+                          type="button"
                           @click="togglePopover()">
                           <span class="material-icons-outlined d-block fs-6">calendar_today</span>
                         </button>
@@ -92,6 +93,7 @@
                           placeholder="請選擇截止日"
                         />
                         <button class="btn btn-sm btn-outline-secondary"
+                          type="button"
                           @click="togglePopover()">
                           <span class="material-icons-outlined d-block fs-6">calendar_today</span>
                         </button>

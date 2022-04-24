@@ -125,7 +125,7 @@
                     v-if="data.imageUrl"
                     class="img-fluid"
                     :src="data.imageUrl"
-                    alt=""
+                    alt="主圖"
                   />
                 </div>
                 <div
@@ -167,7 +167,7 @@
                     class="img-fluid"
                     v-show="image"
                     :src="image"
-                    alt=""
+                    :alt="`配圖-${index}`"
                   />
                 </div>
               </div>
@@ -263,8 +263,8 @@ export default {
             this.data.imagesUrl[e.target.dataset.index] = response.data.imageUrl;
           }
         })
-        .catch((error) => {
-          console.dir(error);
+        .catch(() => {
+          // console.dir(error);
         });
     },
     addImage() {

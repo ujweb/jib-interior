@@ -38,6 +38,7 @@
                   <button
                     class="form-check-input"
                     :class="{'checked': coupon.is_enabled == 1}"
+                    type="button"
                     @click="toggleEnabled(coupon);"
                   ></button>
                 </div>
@@ -64,7 +65,7 @@
       </div>
     </div>
   </div>
-  <pagination-nav :pages="paginations" @get-datas="getProduct"></pagination-nav>
+  <pagination-nav :pages="paginations" @get-datas="getCoupons"></pagination-nav>
   <CouponModal
     :modal="modal.temp"
     :type="modal.title"
@@ -125,9 +126,9 @@ export default {
           this.$emitter.emit('page-loading', false);
           this.coupons = response.data.coupons;
           this.paginations = response.data.pagination;
-        }).catch((error) => {
+        }).catch(() => {
           this.$emitter.emit('page-loading', false);
-          console.log(error);
+          // console.log(error);
         });
     },
     updateCoupon(coupon) {
@@ -160,7 +161,7 @@ export default {
           this.modal.temp = {};
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           if (type === '建立新優惠券') {
             this.modal.title = '新增失敗';
           } else if (type === '編輯優惠券') {
@@ -215,7 +216,7 @@ export default {
           this.getCoupons();
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
           this.modal.title = '修改失敗';
           this.modal.content = error.response.data.message;
         })
