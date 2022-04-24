@@ -14,17 +14,19 @@
       <thead class="table-light">
         <tr>
           <th width="8%" scope="col">#</th>
+          <th width="10%" scope="col">id</th>
           <th width="8%" scope="col">分類</th>
           <th class="text-start" scope="col">產品名稱</th>
           <th width="10%" scope="col">原價</th>
           <th width="10%" scope="col">售價</th>
           <th width="10%" scope="col">是否啟用</th>
-          <th width="20%" scope="col">編輯</th>
+          <th width="18%" scope="col">編輯</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(product, index) in products" :key="product.id">
           <td>{{ index+1 }}</td>
+          <td>{{ product.id }}</td>
           <td class="text-center">{{ product.category }}</td>
           <td class="text-start">{{ product.title }}</td>
           <td>{{ product.origin_price.toLocaleString() }}</td>
@@ -57,7 +59,7 @@
           </td>
         </tr>
         <tr v-if="products?.length === 0">
-          <td class="text-center" colspan="7">
+          <td class="text-center" colspan="8">
             目前尚無資料
           </td>
         </tr>
