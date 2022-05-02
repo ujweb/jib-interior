@@ -8,7 +8,7 @@
         {{ work.title }}
       </h1>
       <div class="row mx-md-0">
-        <img :src="work.img" :alt="work.title" class="img-fluid px-0">
+        <img :src="work.img" :alt="work.title" class="img-fluid px-0" />
       </div>
       <article class="mt-md-50 mt-30">
         <div class="row">
@@ -35,9 +35,7 @@
           <div class="col-xl-8 col-md-9">
             <div class="content" v-html="work.content"></div>
             <div class="recommend pt-50">
-              <h2 class="pt-50 mb-20">
-                推薦商品
-              </h2>
+              <h2 class="pt-50 mb-20">推薦商品</h2>
               <swiper
                 class="cards cards-recommend"
                 :slides-per-view="1"
@@ -52,39 +50,40 @@
                 }"
                 :breakpoints="{
                   576: {
-                      slidesPerView: 2,
-                      spaceBetween: 40,
+                    slidesPerView: 2,
+                    spaceBetween: 40,
                   },
                   1200: {
-                      slidesPerView: 3,
-                      spaceBetween: 40,
-                  }
+                    slidesPerView: 3,
+                    spaceBetween: 40,
+                  },
                 }"
               >
                 <swiper-slide
-                  v-for="recommend in recommends" :key="recommend.id"
+                  v-for="recommend in recommends"
+                  :key="recommend.id"
                 >
-                  <router-link :to="`/product/${recommend.id}`">
+                  <RouterLink :to="`/product/${recommend.id}`">
                     <img
                       :src="recommend.imageUrl"
                       class="card-img img-fluid"
                       :alt="`${recommend.title} 產品圖`"
-                    >
+                    />
                     <span class="visually-hidden">{{ recommend.title }}</span>
-                  </router-link>
+                  </RouterLink>
                   <div class="card-body mt-10 text-center">
-                    <router-link
+                    <RouterLink
                       :to="`/products?category=${recommend.category}`"
                       class="d-block card-label fs-4 link-secondary"
                     >
                       {{ recommend.category }}
-                    </router-link>
-                    <router-link
+                    </RouterLink>
+                    <RouterLink
                       :to="`/product/${recommend.id}`"
                       class="d-block card-title fs-3 fw-bold"
                     >
                       {{ recommend.title }}
-                    </router-link>
+                    </RouterLink>
                     <div class="card-price fs-4 text-gray-300 mt-10 mb-0">
                       NT${{ recommend.price.toLocaleString() }}
                     </div>
@@ -96,8 +95,13 @@
                 <div class="swiper-prev swiper-prev-recommend">
                   <span class="material-icons-outlined">chevron_left</span>
                 </div>
-                <div class="swiper-pagination swiper-pagination-recommend
-                position-static mt-20"></div>
+                <div
+                  class="
+                    swiper-pagination swiper-pagination-recommend
+                    position-static
+                    mt-20
+                  "
+                ></div>
               </swiper>
             </div>
           </div>
@@ -109,7 +113,10 @@
 
 <script>
 import SwiperCore, {
-  Autoplay, Pagination, EffectFade, Navigation,
+  Autoplay,
+  Pagination,
+  EffectFade,
+  Navigation,
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
@@ -145,43 +152,41 @@ export default {
   methods: {
     getWork() {
       const getWorkApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/article/${this.$route.params.id}`;
-      this.$http.get(getWorkApi)
-        .then((response) => {
-          // console.log(response);
-          this.$emitter.emit('page-loading', false);
-          this.work = response.data.article;
-          if (this.work.recommend.length > 0) {
-            this.work.recommend.forEach((item) => {
-              this.getProduct(item);
-            });
-          }
-        });
+      this.$http.get(getWorkApi).then((response) => {
+        // console.log(response);
+        this.$emitter.emit('page-loading', false);
+        this.work = response.data.article;
+        if (this.work.recommend.length > 0) {
+          this.work.recommend.forEach((item) => {
+            this.getProduct(item);
+          });
+        }
+      });
     },
     getProduct(id) {
       const getProductApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${id}`;
-      this.$http.get(getProductApi)
-        .then((response) => {
-          // console.log(response);
-          this.recommends.push(response.data.product);
-        });
+      this.$http.get(getProductApi).then((response) => {
+        // console.log(response);
+        this.recommends.push(response.data.product);
+      });
     },
   },
 };
 </script>
 
 <style lang="scss">
-  @import "https://unpkg.com/swiper/swiper-bundle.min.css";
+@import "https://unpkg.com/swiper/swiper-bundle.min.css";
 </style>
 
 <style lang="scss" scoped>
-  @import "~bootstrap/scss/functions";
-  @import "src/assets/sass/variables";
-  @import "~bootstrap/scss/mixins";
-  @import "src/assets/sass/mixin";
-  .swiper-slide {
-    @include media-breakpoint-down(md) {
-      padding-left: 30px;
-      padding-right: 30px;
-    }
+@import "~bootstrap/scss/functions";
+@import "src/assets/sass/variables";
+@import "~bootstrap/scss/mixins";
+@import "src/assets/sass/mixin";
+.swiper-slide {
+  @include media-breakpoint-down(md) {
+    padding-left: 30px;
+    padding-right: 30px;
   }
+}
 </style>

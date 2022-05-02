@@ -4,7 +4,10 @@
     <button
       class="btn btn-sm btn-danger"
       type="button"
-      @click="modal.title = '清除訂單'; openOrderModal(modal.title, {});"
+      @click="
+        modal.title = '清除訂單';
+        openOrderModal(modal.title, {});
+      "
     >
       清除所有訂單
     </button>
@@ -25,11 +28,13 @@
             </tr>
           </thead>
           <tbody>
-          <tr v-for="(order, index) in orders" :key="order.id">
-              <td>{{ index+1 }}</td>
+            <tr v-for="(order, index) in orders" :key="order.id">
+              <td>{{ index + 1 }}</td>
               <td>
                 {{ toDate(order.create_at) }}
-                <small class="d-block text-secondary">{{ toTime(order.create_at) }}</small>
+                <small class="d-block text-secondary">{{
+                  toTime(order.create_at)
+                }}</small>
               </td>
               <td>{{ order.id }}</td>
               <td>{{ toNumber(order.total) }}</td>
@@ -39,8 +44,12 @@
               </td>
               <td>
                 <p class="m-0" v-if="order.is_paid">
-                  <small class="d-block text-secondary">{{ order.paid_date }}</small>
-                  <small class="d-block text-secondary">{{ order.paid_time }}</small>
+                  <small class="d-block text-secondary">{{
+                    order.paid_date
+                  }}</small>
+                  <small class="d-block text-secondary">{{
+                    order.paid_time
+                  }}</small>
                 </p>
                 <p v-else>-</p>
               </td>
@@ -48,14 +57,20 @@
                 <button
                   class="btn btn-sm btn-primary me-5"
                   type="button"
-                  @click="modal.title = '訂單詳情'; openOrderModal(modal.title, order);"
+                  @click="
+                    modal.title = '訂單詳情';
+                    openOrderModal(modal.title, order);
+                  "
                 >
                   訂單詳情
                 </button>
                 <button
                   class="btn btn-sm btn-outline-danger"
                   type="button"
-                  @click="modal.title = '刪除訂單'; openOrderModal(modal.title, order);"
+                  @click="
+                    modal.title = '刪除訂單';
+                    openOrderModal(modal.title, order);
+                  "
                 >
                   刪除
                 </button>
@@ -86,14 +101,12 @@
       {{ modal.content }}
     </template>
   </DangerModal>
-  <DeleteModal
-    :modal="modal.temp"
-    @emit-delete="deleteOrder"
-  >
+  <DeleteModal :modal="modal.temp" @emit-delete="deleteOrder">
     <template #title>{{ modal.title }}</template>
     <template #default>
       <span class="d-block" v-if="modal.title === '刪除訂單'">
-        是否刪除編號為 <b class="text-danger">{{ modal.temp.id }}</b> 的訂單？<br />
+        是否刪除編號為
+        <b class="text-danger">{{ modal.temp.id }}</b> 的訂單？<br />
       </span>
       <span class="d-block" v-else>
         是否刪除<b class="text-danger">全部</b>訂單？<br />
@@ -132,22 +145,24 @@ export default {
     DeleteModal,
   },
   mounted() {
+    this.$emitter.emit('page-loading', true);
     this.getOrder();
   },
   methods: {
     getOrder(page = 1) {
       const adminOrdersUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`;
       this.$emitter.emit('page-loading', true);
-      this.$http.get(adminOrdersUrl)
+      this.$http
+        .get(adminOrdersUrl)
         .then((response) => {
           // console.log(response);
           this.$emitter.emit('page-loading', false);
           this.paginations = response.data.pagination;
           this.orders = response.data.orders;
         })
-        .catch((error) => {
+        .catch(() => {
           // console.dir(error);
-          alert(error.response.data.message);
+          // alert(error.response.data.message);
         });
     },
     updatePaid(data) {
@@ -163,13 +178,15 @@ export default {
       };
       // console.log(paid);
       let res = {};
-      this.$http.put(adminOrderApi, { data: paid })
+      this.$http
+        .put(adminOrderApi, { data: paid })
         .then((response) => {
           res = {
             title: '更新成功',
             content: response.data.message,
           };
-        }).catch((error) => {
+        })
+        .catch((error) => {
           res = {
             title: '更新失敗',
             content: error.response.data.message,
@@ -191,7 +208,8 @@ export default {
       } else if (this.modal.title === '清除訂單') {
         adminDeleteOrdersUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders/all`;
       }
-      this.$http.delete(adminDeleteOrdersUrl)
+      this.$http
+        .delete(adminDeleteOrdersUrl)
         .then((response) => {
           res = {
             title: '刪除成功',

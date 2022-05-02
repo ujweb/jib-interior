@@ -4,17 +4,21 @@
       <button
         type="button"
         class="btn-link"
-        :class="{ 'active': categories.now === 'all' }"
+        :class="{ active: categories.now === 'all' }"
         @click="$emit('emit-change-category', 'all')"
-      >全部</button>
+      >
+        全部
+      </button>
     </li>
     <li v-for="category in categories.list" :key="`list-${category}`">
       <button
         type="button"
         class="btn-link"
-        :class="{ 'active': categories.now === category }"
+        :class="{ active: categories.now === category }"
         @click="$emit('emit-change-category', category)"
-      >{{ category }}</button>
+      >
+        {{ category }}
+      </button>
     </li>
   </ul>
   <select
@@ -46,11 +50,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  button.btn-link {
-    padding-left: 0;
-    padding-right: 0;
-    border-left-width: 0;
-    border-right-width: 0;
-    background-color: transparent;
-  }
+button.btn-link {
+  padding-left: 0;
+  padding-right: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  background-color: transparent;
+}
 </style>

@@ -4,7 +4,10 @@
     <button
       class="btn btn-sm btn-primary"
       type="button"
-      @click="modal.title = '新增文章'; openArticleModal(modal.title, {});"
+      @click="
+        modal.title = '新增文章';
+        openArticleModal(modal.title, {});
+      "
     >
       新增文章
     </button>
@@ -13,7 +16,7 @@
     <div class="col">
       <div class="table-responsive py-20">
         <table class="table text-center align-middle">
-          <thead>
+          <thead class="table-light">
             <tr>
               <th width="6%" scope="col">#</th>
               <th width="11%" scope="col">日期</th>
@@ -25,17 +28,19 @@
           </thead>
           <tbody>
             <tr v-for="(article, index) in articles" :key="article.id">
-              <td>{{ index+1 }}</td>
-              <td>{{ toDate(article.create_at/1000) }}</td>
+              <td>{{ index + 1 }}</td>
+              <td>{{ toDate(article.create_at / 1000) }}</td>
               <td>{{ article.title }}</td>
               <td>{{ toTags(article.tag) }}</td>
               <td>
-                <div class="form-check form-switch float-none d-inline-block mb-0">
+                <div
+                  class="form-check form-switch float-none d-inline-block mb-0"
+                >
                   <button
                     class="form-check-input"
-                    :class="{'checked': article.isPublic}"
+                    :class="{ checked: article.isPublic }"
                     type="button"
-                    @click="togglePublic(article);"
+                    @click="togglePublic(article)"
                   ></button>
                 </div>
               </td>
@@ -43,14 +48,20 @@
                 <button
                   class="btn btn-sm btn-primary me-5"
                   type="button"
-                  @click="modal.title = '編輯文章'; openArticleModal(modal.title, article);"
+                  @click="
+                    modal.title = '編輯文章';
+                    openArticleModal(modal.title, article);
+                  "
                 >
                   編輯
                 </button>
                 <button
                   class="btn btn-sm btn-outline-danger"
                   type="button"
-                  @click="modal.title = '刪除文章'; openArticleModal(modal.title, article);"
+                  @click="
+                    modal.title = '刪除文章';
+                    openArticleModal(modal.title, article);
+                  "
                 >
                   刪除
                 </button>
@@ -74,13 +85,11 @@
       {{ modal.content }}
     </template>
   </SuccessModal>
-  <DeleteModal
-    :modal="modal.temp"
-    @emit-delete="deleteArticle"
-  >
+  <DeleteModal :modal="modal.temp" @emit-delete="deleteArticle">
     <template #title>{{ modal.title }}</template>
     <template #default>
-      是否刪除 <b class="text-danger">{{ modal.temp.title }}</b><br />
+      是否刪除 <b class="text-danger">{{ modal.temp.title }}</b
+      ><br />
       提醒您，刪除後將無法恢復
     </template>
   </DeleteModal>
@@ -113,17 +122,20 @@ export default {
     DeleteModal,
   },
   mounted() {
+    this.$emitter.emit('page-loading', true);
     this.getArticles();
   },
   methods: {
     getArticles() {
       const adminArticlesApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/articles`;
-      this.$http.get(adminArticlesApi)
+      this.$http
+        .get(adminArticlesApi)
         .then((response) => {
           this.$emitter.emit('page-loading', false);
           this.articles = response.data.articles;
           this.paginations = response.data.pagination;
-        }).catch(() => {
+        })
+        .catch(() => {
           this.$emitter.emit('page-loading', false);
         });
     },
@@ -141,7 +153,10 @@ export default {
       const dataArticle = {
         data: article,
       };
-      if (dataArticle.data.isPublic === '' || dataArticle.data.isPublic === undefined) {
+      if (
+        dataArticle.data.isPublic === ''
+        || dataArticle.data.isPublic === undefined
+      ) {
         dataArticle.data.isPublic = false;
       }
       this.$http[method](adminArticleApi, dataArticle)
@@ -177,7 +192,8 @@ export default {
         data: {},
       };
 
-      this.$http.get(adminArticleApi)
+      this.$http
+        .get(adminArticleApi)
         .then((response) => {
           dataArticle.data = response.data.article;
         })
@@ -188,7 +204,8 @@ export default {
             dataArticle.data.isPublic = true;
           }
 
-          this.$http.put(adminArticleApi, dataArticle)
+          this.$http
+            .put(adminArticleApi, dataArticle)
             .then((response) => {
               this.modal.title = '修改成功';
               this.modal.content = response.data.message;
@@ -210,7 +227,8 @@ export default {
     deleteArticle(article) {
       this.$emitter.emit('page-loading', true);
       const adminCouponApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${article.id}`;
-      this.$http.delete(adminCouponApi)
+      this.$http
+        .delete(adminCouponApi)
         .then((response) => {
           this.modal.title = '刪除成功';
           this.modal.content = response.data.message;

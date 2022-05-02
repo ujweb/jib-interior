@@ -39,7 +39,9 @@
                     type="button"
                     class="btn btn-outline-secondary"
                     @click="randomCoupon(6)"
-                  >產生</button>
+                  >
+                    產生
+                  </button>
                 </div>
               </div>
             </div>
@@ -58,13 +60,19 @@
             <div class="col-md-12 mb-20">
               <div class="row align-items-center">
                 <div class="col">
-                  <label for="startDate" class="visually-hidden">請選擇起始日</label>
-                  <v-date-picker color="indigo" class="inline-block h-full"
+                  <label for="startDate" class="visually-hidden"
+                    >請選擇起始日</label
+                  >
+                  <v-date-picker
+                    color="indigo"
+                    class="inline-block h-full"
                     v-model="data.start_date"
-                    :model-config="modelConfig">
+                    :model-config="modelConfig"
+                  >
                     <template v-slot="{ inputValue, togglePopover }">
                       <div class="input-group">
-                        <input class="form-control"
+                        <input
+                          class="form-control"
                           id="start-date"
                           :value="inputValue"
                           placeholder="請選擇起始日"
@@ -72,8 +80,11 @@
                         <button
                           class="btn btn-sm btn-outline-secondary"
                           type="button"
-                          @click="togglePopover()">
-                          <span class="material-icons-outlined d-block fs-6">calendar_today</span>
+                          @click="togglePopover()"
+                        >
+                          <span class="material-icons-outlined d-block fs-6"
+                            >calendar_today</span
+                          >
                         </button>
                       </div>
                     </template>
@@ -81,21 +92,31 @@
                 </div>
                 <div class="col-auto">～</div>
                 <div class="col">
-                  <label for="startDate" class="visually-hidden">請選擇截止日</label>
-                  <v-date-picker color="indigo" class="inline-block h-full"
+                  <label for="startDate" class="visually-hidden"
+                    >請選擇截止日</label
+                  >
+                  <v-date-picker
+                    color="indigo"
+                    class="inline-block h-full"
                     v-model="data.due_date"
-                    :model-config="modelConfig">
+                    :model-config="modelConfig"
+                  >
                     <template v-slot="{ inputValue, togglePopover }">
                       <div class="input-group">
-                        <input class="form-control"
+                        <input
+                          class="form-control"
                           id="end-date"
                           :value="inputValue"
                           placeholder="請選擇截止日"
                         />
-                        <button class="btn btn-sm btn-outline-secondary"
+                        <button
+                          class="btn btn-sm btn-outline-secondary"
                           type="button"
-                          @click="togglePopover()">
-                          <span class="material-icons-outlined d-block fs-6">calendar_today</span>
+                          @click="togglePopover()"
+                        >
+                          <span class="material-icons-outlined d-block fs-6"
+                            >calendar_today</span
+                          >
                         </button>
                       </div>
                     </template>
@@ -159,7 +180,9 @@ export default {
   emits: ['emit-coupon-data'],
   methods: {
     randomCoupon(size) {
-      const seed = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'p', 'Q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+      const seed = [
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'p', 'Q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+      ];
       const seedLength = seed.length;
       let createCoupon = '';
       for (let i = 0; i < size; i += 1) {

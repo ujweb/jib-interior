@@ -4,7 +4,10 @@
     <button
       class="btn btn-sm btn-primary"
       type="button"
-      @click="modal.title = '新增產品'; openProductModal(modal.title, product);"
+      @click="
+        modal.title = '新增產品';
+        openProductModal(modal.title, product);
+      "
     >
       建立新的產品
     </button>
@@ -25,7 +28,7 @@
       </thead>
       <tbody>
         <tr v-for="(product, index) in products" :key="product.id">
-          <td>{{ index+1 }}</td>
+          <td>{{ index + 1 }}</td>
           <td>{{ product.id }}</td>
           <td class="text-center">{{ product.category }}</td>
           <td class="text-start">{{ product.title }}</td>
@@ -35,8 +38,8 @@
             <div class="form-check form-switch float-none d-inline-block mb-0">
               <button
                 class="form-check-input"
-                :class="{'checked': product.is_enabled == 1}"
-                @click="toggleEnabled(product);"
+                :class="{ checked: product.is_enabled == 1 }"
+                @click="toggleEnabled(product)"
                 type="button"
               ></button>
             </div>
@@ -45,23 +48,27 @@
             <button
               class="btn btn-sm btn-primary me-5"
               type="button"
-              @click="modal.title = '編輯產品'; openProductModal(modal.title, product);"
+              @click="
+                modal.title = '編輯產品';
+                openProductModal(modal.title, product);
+              "
             >
               編輯
             </button>
             <button
               class="btn btn-sm btn-outline-danger"
               type="button"
-              @click="modal.title = '刪除商品'; openProductModal(modal.title, product);"
+              @click="
+                modal.title = '刪除商品';
+                openProductModal(modal.title, product);
+              "
             >
               刪除
             </button>
           </td>
         </tr>
         <tr v-if="products?.length === 0">
-          <td class="text-center" colspan="8">
-            目前尚無資料
-          </td>
+          <td class="text-center" colspan="8">目前尚無資料</td>
         </tr>
       </tbody>
     </table>
@@ -86,13 +93,11 @@
       {{ modal.content }}
     </template>
   </DangerModal>
-  <DeleteModal
-    :modal="modal.temp"
-    @emit-delete-data="deleteProduct"
-  >
+  <DeleteModal :modal="modal.temp" @emit-delete-data="deleteProduct">
     <template #title>{{ modal.title }}</template>
     <template #default>
-      是否刪除 <b class="text-danger">{{ modal.temp.title }}</b><br />
+      是否刪除 <b class="text-danger">{{ modal.temp.title }}</b
+      ><br />
       提醒您，刪除後將無法恢復
     </template>
   </DeleteModal>
@@ -127,21 +132,23 @@ export default {
     DeleteModal,
   },
   mounted() {
+    this.$emitter.emit('page-loading', true);
     this.getProduct();
   },
   methods: {
     getProduct(page = 1) {
       const adminProductsUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       this.$emitter.emit('page-loading', true);
-      this.$http.get(adminProductsUrl)
+      this.$http
+        .get(adminProductsUrl)
         .then((response) => {
           this.paginations = response.data.pagination;
           this.products = response.data.products;
           this.$emitter.emit('page-loading', false);
         })
-        .catch((error) => {
+        .catch(() => {
           // console.dir(error);
-          alert(error.response.data.message);
+          // alert(error.response.data.message);
         });
     },
     updateProduct(type, product) {
@@ -186,7 +193,8 @@ export default {
     deleteProduct(product) {
       const adminProductUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${product.id}`;
       this.$emitter.emit('page-loading', true);
-      this.$http.delete(adminProductUrl)
+      this.$http
+        .delete(adminProductUrl)
         .then((response) => {
           // console.log(response);
           this.modal.title = '刪除成功';
@@ -211,12 +219,16 @@ export default {
         data: this.modal.temp,
       };
 
-      if (this.modal.temp.is_enabled === 0 || this.modal.temp.is_enabled === undefined) {
+      if (
+        this.modal.temp.is_enabled === 0
+        || this.modal.temp.is_enabled === undefined
+      ) {
         this.modal.temp.is_enabled = 1;
       } else if (this.modal.temp.is_enabled === 1) {
         this.modal.temp.is_enabled = 0;
       }
-      this.$http.put(adminProductUrl, dataProduct)
+      this.$http
+        .put(adminProductUrl, dataProduct)
         .then((response) => {
           // console.log(response);
           this.modal.title = '修改成功';

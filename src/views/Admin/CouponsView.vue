@@ -4,7 +4,10 @@
     <button
       class="btn btn-sm btn-primary"
       type="button"
-      @click="modal.title = '建立新優惠券'; openCouponModal(modal.title, coupon);"
+      @click="
+        modal.title = '建立新優惠券';
+        openCouponModal(modal.title, coupon);
+      "
     >
       建立新優惠券
     </button>
@@ -27,19 +30,21 @@
           </thead>
           <tbody>
             <tr v-for="(coupon, index) in coupons" :key="coupon.id">
-              <td>{{ index+1 }}</td>
+              <td>{{ index + 1 }}</td>
               <td>{{ coupon.title }}</td>
               <td>{{ coupon.code }}</td>
               <td>{{ coupon.percent }}</td>
-              <td>{{ toDate(coupon.start_date/1000) }}</td>
-              <td>{{ toDate(coupon.due_date/1000) }}</td>
+              <td>{{ toDate(coupon.start_date / 1000) }}</td>
+              <td>{{ toDate(coupon.due_date / 1000) }}</td>
               <td>
-                <div class="form-check form-switch float-none d-inline-block mb-0">
+                <div
+                  class="form-check form-switch float-none d-inline-block mb-0"
+                >
                   <button
                     class="form-check-input"
-                    :class="{'checked': coupon.is_enabled == 1}"
+                    :class="{ checked: coupon.is_enabled == 1 }"
                     type="button"
-                    @click="toggleEnabled(coupon);"
+                    @click="toggleEnabled(coupon)"
                   ></button>
                 </div>
               </td>
@@ -47,14 +52,20 @@
                 <button
                   class="btn btn-sm btn-primary me-5"
                   type="button"
-                  @click="modal.title = '編輯優惠券'; openCouponModal(modal.title, coupon);"
+                  @click="
+                    modal.title = '編輯優惠券';
+                    openCouponModal(modal.title, coupon);
+                  "
                 >
                   編輯
                 </button>
                 <button
                   class="btn btn-sm btn-outline-danger"
                   type="button"
-                  @click="modal.title = '刪除優惠券'; openCouponModal(modal.title, coupon);"
+                  @click="
+                    modal.title = '刪除優惠券';
+                    openCouponModal(modal.title, coupon);
+                  "
                 >
                   刪除
                 </button>
@@ -79,13 +90,11 @@
       {{ modal.content }}
     </template>
   </SuccessModal>
-  <DeleteModal
-    :modal="modal.temp"
-    @emit-delete="deleteCoupon"
-  >
+  <DeleteModal :modal="modal.temp" @emit-delete="deleteCoupon">
     <template #title>{{ modal.title }}</template>
     <template #default>
-      是否刪除 <b class="text-danger">{{ modal.temp.title }}</b>優惠券<br />
+      是否刪除 <b class="text-danger">{{ modal.temp.title }}</b
+      >優惠券<br />
       提醒您，刪除後將無法恢復
     </template>
   </DeleteModal>
@@ -116,17 +125,20 @@ export default {
     DeleteModal,
   },
   mounted() {
+    this.$emitter.emit('page-loading', true);
     this.getCoupons();
   },
   methods: {
     getCoupons() {
       const adminCouponsApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupons`;
-      this.$http.get(adminCouponsApi)
+      this.$http
+        .get(adminCouponsApi)
         .then((response) => {
           this.$emitter.emit('page-loading', false);
           this.coupons = response.data.coupons;
           this.paginations = response.data.pagination;
-        }).catch(() => {
+        })
+        .catch(() => {
           this.$emitter.emit('page-loading', false);
           // console.log(error);
         });
@@ -146,7 +158,10 @@ export default {
       const dataCoupon = {
         data: coupon,
       };
-      if (dataCoupon.data.is_enabled === '' || dataCoupon.data.is_enabled === undefined) {
+      if (
+        dataCoupon.data.is_enabled === ''
+        || dataCoupon.data.is_enabled === undefined
+      ) {
         dataCoupon.data.is_enabled = 0;
       }
       this.$http[method](adminCouponApi, dataCoupon)
@@ -177,7 +192,8 @@ export default {
     deleteCoupon(coupon) {
       this.$emitter.emit('page-loading', true);
       const adminCouponApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon/${coupon.id}`;
-      this.$http.delete(adminCouponApi)
+      this.$http
+        .delete(adminCouponApi)
         .then((response) => {
           this.modal.title = '刪除成功';
           this.modal.content = response.data.message;
@@ -202,13 +218,17 @@ export default {
         data: this.modal.temp,
       };
 
-      if (this.modal.temp.is_enabled === 0 || this.modal.temp.is_enabled === undefined) {
+      if (
+        this.modal.temp.is_enabled === 0
+        || this.modal.temp.is_enabled === undefined
+      ) {
         this.modal.temp.is_enabled = 1;
       } else if (this.modal.temp.is_enabled === 1) {
         this.modal.temp.is_enabled = 0;
       }
 
-      this.$http.put(adminCouponApi, dataCoupon)
+      this.$http
+        .put(adminCouponApi, dataCoupon)
         .then((response) => {
           // console.log(response);
           this.modal.title = '修改成功';

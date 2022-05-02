@@ -5,7 +5,6 @@
     data-bs-backdrop="static"
     data-bs-keyboard="false"
     novalidate
-    @submit.prevent
   >
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">

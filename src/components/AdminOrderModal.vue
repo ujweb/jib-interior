@@ -5,15 +5,18 @@
     data-bs-backdrop="static"
     data-bs-keyboard="false"
     novalidate
-    @submit.prevent
   >
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div
+      class="
+        modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable
+      "
+    >
       <div class="modal-content">
         <div class="modal-body p-30">
           <h2 class="mb-2"><slot name="title"></slot></h2>
           <div class="row">
             <div class="col-md-6">
-              <h5 class="mb-1">訂購者資訊</h5>
+              <h5 class="fs-3 mb-0">訂購者資訊</h5>
               <table class="table">
                 <tbody v-if="user">
                   <tr>
@@ -38,7 +41,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h5 class="mt-5 mb-1">訂單細節</h5>
+              <h5 class="fs-3 mb-0">訂單細節</h5>
               <table class="table">
                 <tbody>
                   <tr>
@@ -57,7 +60,9 @@
                   <tr>
                     <th>付款狀態</th>
                     <td>
-                      <span v-if="data.is_paid" class="text-success">已付款</span>
+                      <span v-if="data.is_paid" class="text-success"
+                        >已付款</span
+                      >
                       <span v-else class="text-muted">尚未付款</span>
                     </td>
                   </tr>
@@ -65,27 +70,31 @@
               </table>
             </div>
             <div class="col-md-6">
-              <h5 class="mb-1">訂單內容</h5>
+              <h5 class="fs-3 mb-0">訂單內容</h5>
               <table class="table">
                 <tbody v-if="user">
                   <tr v-for="detail in details" :key="detail.id">
-                    <td style="width: 150px;">
+                    <td style="width: 150px">
                       <img
                         class="img-fluid"
                         :src="detail.product.imageUrl"
                         :alt="detail.product.title"
-                      >
+                      />
                     </td>
                     <td>
-                      <h5 class="card-title">{{ detail.product.title }}</h5>
-                      <p class="card-text">
+                      <h5 class="card-title my-0">
+                        {{ detail.product.title }}
+                      </h5>
+                      <p class="card-text my-0">
                         <small class="text-secondary">
                           NT$ {{ toNumber(detail.product.price) }}
                         </small>
                       </p>
                     </td>
                     <td>
-                      <div class="d-flex align-items-center justify-content-end">
+                      <div
+                        class="d-flex align-items-center justify-content-end"
+                      >
                         <span class="pe-1">數量</span>
                         <span>
                           {{ detail.qty }}
@@ -98,32 +107,36 @@
               </table>
               <div class="d-flex align-items-center justify-content-between">
                 <div>
-                  共 <span class="text-primary">{{ getTotalQty(details) }}</span> 項
+                  共
+                  <span class="text-primary">{{ getTotalQty(details) }}</span>
+                  項
                 </div>
                 <div>
-                  總金額：<span class="fs-3 text-primary">{{ toNumber(data.total) }}</span>
+                  總金額：<span class="fs-3 text-primary">{{
+                    toNumber(data.total)
+                  }}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="d-flex align-items-center justify-content-end mt-2">
-              <div class="d-flex justify-content-end">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                    v-model="data.is_paid"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    <span v-if="data.is_paid">已付款</span>
-                    <span v-else>未付款</span>
-                  </label>
-                </div>
+          <div class="d-flex align-items-center justify-content-end mt-20">
+            <div class="d-flex justify-content-end">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                  v-model="data.is_paid"
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  <span v-if="data.is_paid">已付款</span>
+                  <span v-else>未付款</span>
+                </label>
               </div>
+            </div>
           </div>
-          <div class="d-flex align-items-center justify-content-end mt-2">
+          <div class="d-flex align-items-center justify-content-end mt-20">
             <button
               type="button"
               class="btn btn-outline-secondary me-10"
@@ -189,13 +202,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #editAmount {
+@import "~bootstrap/scss/functions";
+@import "src/assets/sass/variables";
+
+#editAmount {
+  min-width: 0;
+  + .btn-sm {
     min-width: 0;
-    + .btn-sm {
-      min-width: 0;
-    }
   }
-  table {
-    vertical-align: middle;
+}
+table {
+  vertical-align: middle;
+  &.table > :not(caption) > * > * {
+    border-bottom-color: $gray-200;
   }
+}
 </style>

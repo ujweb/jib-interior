@@ -1,50 +1,47 @@
 <template>
+  <PageLoading />
   <div class="container-fluid">
     <div class="row">
-      <aside
-        class="bg-light sidebar min-vh-100 py-2"
-      >
-      <div class="position-sticky h-100 d-flex flex-column">
-        <h2 class="mb-20 py-20 border-bottom">jib 後台系統</h2>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <router-link to="/admin/products">
-              <span class="material-icons-outlined me-5">inventory_2</span>
-              <span>產品管理</span>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/admin/orders">
-              <span class="material-icons-outlined me-5">summarize</span>
-              <span>訂單管理</span>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/admin/coupons">
-              <span class="material-icons-outlined me-5">confirmation_number</span>
-              <span>優惠券管理</span>
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/admin/articles">
-              <span class="material-icons-outlined me-5">description</span>
-              <span>文章管理</span>
-            </router-link>
-          </li>
-        </ul>
-        <div class="mt-auto"></div>
-        <ul class="nav flex-column border-top">
-          <li class="nav-item">
-            <button
-              type="button"
-              class="w-100"
-              @click.prevent="logout"
-            >
-              登出
-            </button>
-          </li>
-        </ul>
-      </div>
+      <aside class="bg-light sidebar min-vh-100 py-2">
+        <div class="position-sticky h-100 d-flex flex-column">
+          <h2 class="mb-20 py-20 border-bottom">jib 後台系統</h2>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <RouterLink to="/admin/products">
+                <span class="material-icons-outlined me-5">inventory_2</span>
+                <span>產品管理</span>
+              </RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="/admin/orders">
+                <span class="material-icons-outlined me-5">summarize</span>
+                <span>訂單管理</span>
+              </RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="/admin/coupons">
+                <span class="material-icons-outlined me-5"
+                  >confirmation_number</span
+                >
+                <span>優惠券管理</span>
+              </RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="/admin/articles">
+                <span class="material-icons-outlined me-5">description</span>
+                <span>文章管理</span>
+              </RouterLink>
+            </li>
+          </ul>
+          <div class="mt-auto"></div>
+          <ul class="nav flex-column border-top">
+            <li class="nav-item">
+              <button type="button" class="w-100" @click.prevent="logout">
+                登出
+              </button>
+            </li>
+          </ul>
+        </div>
       </aside>
       <div class="content-wrapper p-20">
         <RouterView v-if="checkAccount" />
@@ -61,33 +58,38 @@ export default {
     };
   },
   mounted() {
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)signinToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    const token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)signinToken\s*=\s*([^;]*).*$)|^.*$/,
+      '$1',
+    );
     this.$http.defaults.headers.common.Authorization = token;
     this.checkSignin();
   },
   methods: {
     checkSignin() {
       const checkUserApi = `${process.env.VUE_APP_API}/api/user/check`;
-      this.$http.post(checkUserApi)
+      this.$http
+        .post(checkUserApi)
         .then(() => {
           this.$emitter.emit('page-loading', false);
           this.checkAccount = true;
         })
-        .catch((error) => {
+        .catch(() => {
           // console.dir(error);
-          alert(error.response.data.message);
+          // alert(error.response.data.message);
           this.$router.push('/login');
         });
     },
     logout() {
       const logoutUrl = `${process.env.VUE_APP_API}/logout`;
-      this.$http.post(logoutUrl)
+      this.$http
+        .post(logoutUrl)
         .then(() => {
           this.$router.push('/login'); // 登出成功後返回登入首頁
         })
-        .catch((error) => {
+        .catch(() => {
           // console.dir(error);
-          alert(error.response.data.message);
+          // alert(error.response.data.message);
         });
     },
   },
@@ -101,39 +103,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "~bootstrap/scss/functions";
-  @import "src/assets/sass/variables";
-  @import "~bootstrap/scss/mixins";
-  @import "src/assets/sass/mixin";
+@import "~bootstrap/scss/functions";
+@import "src/assets/sass/variables";
+@import "~bootstrap/scss/mixins";
+@import "src/assets/sass/mixin";
 
-  aside {
-    width: 250px;
-    ul {
-      @include list(0, 0, none);
+aside {
+  width: 250px;
+  ul {
+    @include list(0, 0, none);
+  }
+  .nav-item {
+    + .nav-item {
+      margin-top: 0.25rem;
     }
-    .nav-item {
-      + .nav-item {
-        margin-top: 0.25rem;
+    > a,
+    > button {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0.5rem;
+      color: $black;
+      text-decoration: none;
+      border: 0;
+      background-color: transparent;
+      appearance: none;
+      &:hover {
+        color: $primary;
       }
-      > a, > button {
-        display: flex;
-        align-items: center;
-        padding: 0.75rem 0.5rem;
-        color: $black;
-        text-decoration: none;
-        border: 0;
-        background-color: transparent;
-        appearance: none;
-        &:hover {
-          color: $primary;
-        }
-        &.router-link-exact-active {
-          background-color: rgba($black, 0.05);
-        }
+      &.RouterLink-exact-active {
+        background-color: rgba($black, 0.05);
       }
     }
   }
-  .content-wrapper {
-    width: calc(100% - 250px);
-  }
+}
+.content-wrapper {
+  width: calc(100% - 250px);
+}
 </style>

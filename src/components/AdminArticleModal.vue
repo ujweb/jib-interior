@@ -44,7 +44,9 @@
                       type="button"
                       @click="togglePopover()"
                     >
-                      <span class="material-icons-outlined d-block fs-6">calendar_today</span>
+                      <span class="material-icons-outlined d-block fs-6"
+                        >calendar_today</span
+                      >
                     </button>
                   </div>
                 </template>
@@ -53,10 +55,7 @@
             <div class="col-md-6 mb-20">
               <label for="image" class="form-label">文章主圖</label>
               <div class="row">
-                <div
-                  class="col-md-8 pe-0"
-                  :class="{ 'col-md-12': data.img }"
-                >
+                <div class="col-md-8 pe-0" :class="{ 'col-md-12': data.img }">
                   <input
                     type="text"
                     id="image"
@@ -75,7 +74,15 @@
                   <label for="mainFile" class="position-absolute"></label>
                   <input
                     type="file"
-                    class="d-block w-100 h-100 position-absolute top-0 start-0 opacity-0"
+                    class="
+                      d-block
+                      w-100
+                      h-100
+                      position-absolute
+                      top-0
+                      start-0
+                      opacity-0
+                    "
                     id="mainFile"
                     placeholder="上傳圖片"
                     data-type="main"
@@ -128,7 +135,11 @@
             </div>
             <div class="col-md-3 mb-20">
               <label for="housetype" class="form-label">案件類型</label>
-              <select id="housetype" class="form-select" v-model="data.housetype">
+              <select
+                id="housetype"
+                class="form-select"
+                v-model="data.housetype"
+              >
                 <option selected disabled>請選擇案件類型</option>
                 <option value="新屋裝修">新屋裝修</option>
                 <option value="老屋翻新">老屋翻新</option>
@@ -155,7 +166,11 @@
             </div>
             <div class="col-md-2 mb-20">
               <label for="styletype" class="form-label">風格</label>
-              <select id="styletype" class="form-select" v-model="data.styletype">
+              <select
+                id="styletype"
+                class="form-select"
+                v-model="data.styletype"
+              >
                 <option selected disabled>請選擇風格</option>
                 <option value="現代">現代</option>
                 <option value="簡約">簡約</option>
@@ -170,7 +185,9 @@
               </select>
             </div>
             <div class="col-md-12 mb-20">
-              <label for="recommends" class="form-label">推薦商品（三項為限）</label>
+              <label for="recommends" class="form-label"
+                >推薦商品（三項為限）</label
+              >
               <div
                 class="d-flex flex-wrap form-control input-recommends"
                 :class="data.recommend > 0 ? 'p-1' : ''"
@@ -194,7 +211,9 @@
                   id="recommends"
                   class="col border-0"
                   :placeholder="
-                    data.recommend.length > 0 ? '' : '輸入完 id 後，使用 ENTER 新增'
+                    data.recommend.length > 0
+                      ? ''
+                      : '輸入完 id 後，使用 ENTER 新增'
                   "
                   v-model.trim="insertRecommend"
                   @keydown.enter="addRecommend"
@@ -218,9 +237,7 @@
               id="checkPublic"
               v-model.number="data.isPublic"
             />
-            <label class="form-check-label" for="checkPublic">
-              是否公開
-            </label>
+            <label class="form-check-label" for="checkPublic"> 是否公開 </label>
           </div>
           <div class="d-flex align-items-center justify-content-end mt-20">
             <button
@@ -266,15 +283,30 @@ export default {
       },
       editor: ClassicEditor,
       editorConfig: {
-        toolbar: ['heading', '|', 'bold', 'italic', 'link', 'numberedList', 'bulletedList', '|', 'blockQuote', 'undo', 'redo'],
+        toolbar: [
+          'heading',
+          '|',
+          'bold',
+          'italic',
+          'link',
+          'numberedList',
+          'bulletedList',
+          '|',
+          'blockQuote',
+          'undo',
+          'redo',
+        ],
       },
     };
   },
   methods: {
     getContent() {
-      if (!this.data.id) { return; }
+      if (!this.data.id) {
+        return;
+      }
       const adminArticleApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${this.data.id}`;
-      this.$http.get(adminArticleApi)
+      this.$http
+        .get(adminArticleApi)
         .then((res) => {
           if (!res.data.success) {
             this.$pushMessage(res);
@@ -294,7 +326,9 @@ export default {
       }
     },
     removeTag(tag, key) {
-      const newArray = this.data.tag.filter((item, index) => item !== tag && key !== index);
+      const newArray = this.data.tag.filter(
+        (item, index) => item !== tag && key !== index,
+      );
       this.data.tag = newArray;
     },
     addRecommend() {
@@ -317,7 +351,11 @@ export default {
       formData.append('file-to-upload', e.target.files[0]);
       // 使用 file-to-upload 是因為 Api 所需
 
-      this.$http.post(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`, formData)
+      this.$http
+        .post(
+          `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`,
+          formData,
+        )
         .then((response) => {
           // console.log(response.data.imageUrl);
           this.data.img = response.data.imageUrl;

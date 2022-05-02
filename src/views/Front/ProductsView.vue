@@ -3,7 +3,7 @@
     結帳輸入 HBD2022，享有週年慶九折優惠
   </div>
   <section class="opening-inner">
-    <img src="../../../public/kv-products.jpg" alt="家具選購 示意圖">
+    <img src="@/assets/images/kv-products.jpg" alt="家具選購 示意圖" />
     <h1 class="mb-0 serif">家具選購</h1>
   </section>
   <section class="pt-50">
@@ -20,15 +20,17 @@
             <div class="row cards cards-products">
               <div
                 class="col-xl-3 col-md-4 col-6 card card-vertical"
-                v-for="product in products" :key="product.id"
+                v-for="product in products"
+                :key="product.id"
               >
-                <router-link :to="`/product/${product.id}`">
+                <RouterLink :to="`/product/${product.id}`">
                   <img
                     :src="product.imageUrl"
                     class="card-img img-fluid"
-                    :alt="`${product.title}-主圖`">
+                    :alt="`${product.title}-主圖`"
+                  />
                   <span class="visually-hidden">{{ product.title }}}</span>
-                </router-link>
+                </RouterLink>
                 <div class="card-body mt-10 text-center">
                   <button
                     type="button"
@@ -37,12 +39,12 @@
                   >
                     {{ product.category }}
                   </button>
-                  <router-link
+                  <RouterLink
                     :to="`/product/${product.id}`"
                     class="d-block card-title fs-3 fw-bold"
                   >
                     {{ product.title }}
-                  </router-link>
+                  </RouterLink>
                   <div class="card-price fs-4 text-gray-300 mt-10 mb-0">
                     NT${{ product.price.toLocaleString() }}
                   </div>
@@ -84,7 +86,10 @@ export default {
     if (this.$route.query.category !== 'all') {
       this.category.now = this.$route.query.category;
       this.changeCategory(this.$route.query.category);
-    } else if (this.$route.query === {} || this.$route.query.category === 'all') {
+    } else if (
+      this.$route.query === {}
+      || this.$route.query.category === 'all'
+    ) {
       this.category.now = 'all';
       this.getProducts();
     }
@@ -92,9 +97,12 @@ export default {
   methods: {
     getCategories() {
       const getProductsApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
-      this.$http.get(getProductsApi)
+      this.$http
+        .get(getProductsApi)
         .then((response) => {
-          const unSortCategory = response.data.products.map((item) => item.category);
+          const unSortCategory = response.data.products.map(
+            (item) => item.category,
+          );
           const sortedCategory = unSortCategory.filter(
             (item, i) => unSortCategory.indexOf(item) === i,
           );
@@ -106,14 +114,19 @@ export default {
     },
     getProducts() {
       let getProductsApi = '';
-      if (this.category.now === 'all' || this.category.now === 'undefined' || this.category.now === '') {
+      if (
+        this.category.now === 'all'
+        || this.category.now === 'undefined'
+        || this.category.now === ''
+      ) {
         getProductsApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
         this.$router.push('/products?category=all');
       } else {
         getProductsApi = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products?page=1&category=${this.category.now}`;
         this.$router.push(`/products?category=${this.category.now}`);
       }
-      this.$http.get(getProductsApi)
+      this.$http
+        .get(getProductsApi)
         .then((response) => {
           this.products = response.data.products.reverse(); // 最新的往上
           this.$emitter.emit('page-loading', false);
@@ -126,7 +139,6 @@ export default {
     changeCategory(value) {
       this.$emitter.emit('page-loading', true);
       this.category.now = value;
-      console.log(this.$route);
       this.getProducts();
     },
   },
@@ -134,17 +146,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "~bootstrap/scss/functions";
-  @import "src/assets/sass/variables";
-  @import "~bootstrap/scss/mixins";
-  button.link-secondary {
-    padding: 0;
-    margin: auto;
-    color: $grullo;
-    border-width: 0;
-    background-color: transparent;
-    &:hover {
-      color: $gold-fusion;
-    }
+@import "~bootstrap/scss/functions";
+@import "src/assets/sass/variables";
+@import "~bootstrap/scss/mixins";
+button.link-secondary {
+  padding: 0;
+  margin: auto;
+  color: $grullo;
+  border-width: 0;
+  background-color: transparent;
+  &:hover {
+    color: $gold-fusion;
   }
+}
 </style>

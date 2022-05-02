@@ -9,7 +9,7 @@
   <footer>
     <div class="container">
       <span class="d-inline-block">jib interior © 2022 All Rights Reserved.</span>
-      <span class="d-inline-block">圖片為練習使用，無商業用途｜<router-link to="/login">登入後台</router-link></span>
+      <span class="d-inline-block">圖片為練習使用，無商業用途｜<RouterLink to="/login">登入後台</RouterLink></span>
     </div>
   </footer>
   <SuccessModal>
@@ -29,7 +29,6 @@ export default {
     return {
       cart: {
         data: [],
-        amount: 0,
         final_total: 0,
         total: 0,
       },
@@ -75,9 +74,7 @@ export default {
           this.cart.data = response.data.data.carts;
           this.cart.final_total = 0;
           this.cart.total = 0;
-          this.cart.amount = 0;
           this.cart.data.forEach((element) => {
-            this.cart.amount += element.qty;
             this.cart.final_total += element.final_total;
             this.cart.total += element.total;
           });
@@ -100,6 +97,7 @@ export default {
           // console.log(response);
           this.modal.title = response.data.message;
           this.modal.content = `已將${response.data.data.product.title}加入購物車`;
+          this.getCart();
           this.openSuccessModal();
           this.$emitter.emit('page-loading', false);
         })

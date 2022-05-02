@@ -31,28 +31,28 @@
                 v-for="product in products"
                 :key="product.id"
               >
-                <router-link :to="`/product/${product.product.id}`" class="card-img me-10">
+                <RouterLink :to="`/product/${product.product.id}`" class="card-img me-10">
                   <img
                     :src="`${product.product.imageUrl}`"
                     class="img-fluid"
                     :alt="`${product.product.title} 產品圖`"
                   >
                   <span class="visually-hidden">{{ product.product.title }}</span>
-                </router-link>
+                </RouterLink>
                 <div class="card-body">
                   <div class="card-text me-md-20">
-                    <router-link
+                    <RouterLink
                       :to="`/products?category=${product.product.category}`"
                       class="d-block card-label fs-4 link-secondary"
                     >
                       {{ product.product.category }}
-                    </router-link>
-                    <router-link
+                    </RouterLink>
+                    <RouterLink
                       :to="`/product/${product.product_id}`"
                       class="d-block card-title fs-3 fw-bold
                     ">
                       {{ product.product.title }}
-                    </router-link>
+                    </RouterLink>
                     <div class="card-amount fs-4 mt-5">數量：{{ product.qty }}</div>
                   </div>
                   <div class="card-price fs-4 mt-md-0 mt-5 text-md-end">
@@ -66,42 +66,42 @@
             <div class="p-30 bg-bright-gray bg-opacity-25">
               <h2 class="mb-20">訂購資訊</h2>
               <div class="d-flex align-items-center mt-20">
-                  <div class="order-title fs-3">訂單狀態</div>
-                  <div class="fs-3 text-danger" v-if="!orders.is_paid">未付款</div>
-                  <div class="fs-3 text-success" v-else>已付款</div>
+                <div class="order-title fs-3">訂單狀態</div>
+                <div class="fs-3 text-danger" v-if="!orders.is_paid">未付款</div>
+                <div class="fs-3 text-success" v-else>已付款</div>
               </div>
               <div class="d-flex align-items-center mt-20">
-                  <div class="order-title fs-3">訂單金額</div>
-                  <h4 class="fs-2 mb-0">NT$ {{ toNumber(orders.total) }}</h4>
+                <div class="order-title fs-3">訂單金額</div>
+                <h4 class="fs-2 mb-0">NT$ {{ toNumber(orders.total) }}</h4>
               </div>
               <div class="d-flex align-items-center mt-20">
-                  <div class="order-title fs-3">訂單編號</div>
-                  <div class="fs-3">{{ orders.id }}</div>
+                <div class="order-title fs-3">訂單編號</div>
+                <div class="fs-3">{{ orders.id }}</div>
               </div>
               <div class="d-flex align-items-center mt-20">
-                  <div class="order-title fs-3">訂單成立時間</div>
-                  <div class="fs-3">{{ toDate(orders.create_at) }}</div>
+                <div class="order-title fs-3">訂單成立時間</div>
+                <div class="fs-3">{{ toDate(orders.create_at) }}</div>
               </div>
               <hr class="my-20">
               <div class="d-flex align-items-center mt-20">
-                  <div class="order-title fs-3">Email</div>
-                  <div class="fs-3">{{ orders.user?.email }}</div>
+                <div class="order-title fs-3">Email</div>
+                <div class="fs-3">{{ orders.user?.email }}</div>
               </div>
               <div class="d-flex align-items-center mt-20">
-                  <div class="order-title fs-3">收件人姓名</div>
-                  <div class="fs-3">{{ orders.user?.name }}</div>
+                <div class="order-title fs-3">收件人姓名</div>
+                <div class="fs-3">{{ orders.user?.name }}</div>
               </div>
               <div class="d-flex align-items-center mt-20">
-                  <div class="order-title fs-3">聯絡電話</div>
-                  <div class="fs-3">{{ orders.user?.tel }}</div>
+                <div class="order-title fs-3">聯絡電話</div>
+                <div class="fs-3">{{ orders.user?.tel }}</div>
               </div>
               <div class="d-flex align-items-center mt-20">
-                  <div class="order-title fs-3">收件地址</div>
-                  <div class="fs-3">{{ orders.user?.address }}</div>
+                <div class="order-title fs-3">收件地址</div>
+                <div class="fs-3">{{ orders.user?.address }}</div>
               </div>
               <div class="d-flex align-items-center mt-20">
-                  <div class="order-title fs-3">備註</div>
-                  <div class="fs-3">無</div>
+                <div class="order-title fs-3">備註</div>
+                <div class="fs-3">無</div>
               </div>
               <button
                 type="button"
