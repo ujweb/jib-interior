@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-items-center justify-content-between">
-    <h1 class="fs-2 mb-0">後台優惠券列表</h1>
+    <h1 class="fs-2 mb-0">優惠券管理</h1>
     <button
       class="btn btn-sm btn-primary"
       type="button"

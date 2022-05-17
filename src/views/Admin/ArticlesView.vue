@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-items-center justify-content-between">
-    <h1 class="fs-2 mb-0">後台文章列表</h1>
+    <h1 class="fs-2 mb-0">文章管理</h1>
     <button
       class="btn btn-sm btn-primary"
       type="button"
@@ -30,7 +30,11 @@
             <tr v-for="(article, index) in articles" :key="article.id">
               <td>{{ index + 1 }}</td>
               <td>{{ toDate(article.create_at / 1000) }}</td>
-              <td>{{ article.title }}</td>
+              <td>
+                <RouterLink :to="`/work/${article.id}`" target="_blank">
+                  {{ article.title }}
+                </RouterLink>
+              </td>
               <td>{{ toTags(article.tag) }}</td>
               <td>
                 <div

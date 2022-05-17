@@ -98,7 +98,7 @@
                 :class="data.tag > 0 ? 'p-1' : ''"
               >
                 <div
-                  class="btn btn-sm alert-secondary btn-tags me-5 lh-1"
+                  class="btn btn-sm btn-bright-gray btn-tags me-5 lh-1"
                   v-for="(item, key) in data.tag"
                   :key="key"
                 >
@@ -193,7 +193,7 @@
                 :class="data.recommend > 0 ? 'p-1' : ''"
               >
                 <div
-                  class="btn btn-sm alert-secondary btn-recommends me-5 lh-1"
+                  class="btn btn-sm btn-bright-gray btn-recommends me-5 lh-1"
                   v-for="(item, key) in data.recommend"
                   :key="key"
                 >

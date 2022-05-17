@@ -130,7 +130,7 @@ aside {
       &:hover {
         color: $primary;
       }
-      &.RouterLink-exact-active {
+      &.router-link-active {
         background-color: rgba($black, 0.05);
       }
     }

@@ -1,6 +1,10 @@
 <template>
+  <h1 class="fs-2 mb-20">產品管理</h1>
   <div class="d-flex align-items-center justify-content-between">
-    <h1 class="fs-2 mb-0">產品列表</h1>
+    <select class="form-select w-auto" v-model="category.now" @change="getProduct">
+      <option value="all" selected>全部商品</option>
+      <option v-for="item in category.array" :key="`${item}`">{{ item }}</option>
+    </select>
     <button
       class="btn btn-sm btn-primary"
       type="button"
@@ -16,9 +20,9 @@
     <table class="table text-center align-middle">
       <thead class="table-light">
         <tr>
-          <th width="8%" scope="col">#</th>
-          <th width="10%" scope="col">id</th>
-          <th width="8%" scope="col">分類</th>
+          <th width="6%" scope="col">#</th>
+          <th width="12%" scope="col">id</th>
+          <th width="10%" scope="col">分類</th>
           <th class="text-start" scope="col">產品名稱</th>
           <th width="10%" scope="col">原價</th>
           <th width="10%" scope="col">售價</th>
@@ -29,9 +33,13 @@
       <tbody>
         <tr v-for="(product, index) in products" :key="product.id">
           <td>{{ index + 1 }}</td>
-          <td>{{ product.id }}</td>
+          <td><small>{{ product.id }}</small></td>
           <td class="text-center">{{ product.category }}</td>
-          <td class="text-start">{{ product.title }}</td>
+          <td class="text-start">
+            <RouterLink :to="`/product/${product.id}`" target="_blank">
+              {{ product.title }}
+            </RouterLink>
+          </td>
           <td>{{ product.origin_price.toLocaleString() }}</td>
           <td>{{ product.price.toLocaleString() }}</td>
           <td>
@@ -115,6 +123,10 @@ export default {
     return {
       page: 1,
       products: [],
+      category: {
+        now: 'all',
+        array: [],
+      },
       paginations: {},
       bsModal: null,
       modal: {
@@ -133,11 +145,32 @@ export default {
   },
   mounted() {
     this.$emitter.emit('page-loading', true);
+    this.getProducts();
     this.getProduct();
   },
   methods: {
+    getProducts() {
+      const adminProductsUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products/all`;
+      this.$emitter.emit('page-loading', true);
+      this.$http
+        .get(adminProductsUrl)
+        .then((response) => {
+          this.category.array = [...new Set(
+            Object.values(response.data.products).map((o) => o.category),
+          )];
+        })
+        .catch(() => {
+          // console.dir(error);
+          // alert(error.response.data.message);
+        });
+    },
     getProduct(page = 1) {
-      const adminProductsUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
+      let adminProductsUrl = '';
+      if (this.category.now === 'all') {
+        adminProductsUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
+      } else {
+        adminProductsUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}&category=${this.category.now}`;
+      }
       this.$emitter.emit('page-loading', true);
       this.$http
         .get(adminProductsUrl)

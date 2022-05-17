@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-items-center justify-content-between">
-    <h1 class="fs-2 mb-0">訂單列表</h1>
+    <h1 class="fs-2 mb-0">訂單管理</h1>
     <button
       class="btn btn-sm btn-danger"
       type="button"
@@ -36,7 +36,7 @@
                   toTime(order.create_at)
                 }}</small>
               </td>
-              <td>{{ order.id }}</td>
+              <td><small>{{ order.id }}</small></td>
               <td>{{ toNumber(order.total) }}</td>
               <td>
                 <span class="text-success" v-if="order.is_paid">已付款</span>

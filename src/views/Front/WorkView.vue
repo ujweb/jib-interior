@@ -34,7 +34,7 @@
           </div>
           <div class="col-xl-8 col-md-9">
             <div class="content" v-html="work.content"></div>
-            <div class="recommend pt-50">
+            <div class="recommend pt-50" v-if="recommends.length > 0">
               <h2 class="pt-50 mb-20">推薦商品</h2>
               <swiper
                 class="cards cards-recommend"

@@ -90,7 +90,7 @@ export default {
           document.cookie = `signinToken=${token}; expires=${new Date(
             expired,
           )}`;
-          this.$router.push('/admin');
+          this.$router.push('/admin/products');
         })
         .catch((error) => {
           // console.dir(error);
