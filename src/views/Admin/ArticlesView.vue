@@ -60,7 +60,7 @@
                   編輯
                 </button>
                 <button
-                  class="btn btn-sm btn-outline-danger"
+                  class="btn btn-sm btn-bright-gray"
                   type="button"
                   @click="
                     modal.title = '刪除文章';

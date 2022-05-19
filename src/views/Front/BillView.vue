@@ -101,7 +101,7 @@
               </div>
               <div class="d-flex align-items-center mt-20">
                 <div class="order-title fs-3">備註</div>
-                <div class="fs-3">無</div>
+                <div class="fs-3">{{ orders.message }}</div>
               </div>
               <button
                 type="button"
@@ -156,9 +156,8 @@ export default {
           }
           this.$emitter.emit('page-loading', false);
         })
-        .catch((error) => {
+        .catch(() => {
           this.$emitter.emit('page-loading', false);
-          this.$pushMessage(error);
         });
     },
     toNumber(val) {

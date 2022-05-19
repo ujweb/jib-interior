@@ -74,14 +74,16 @@
                   type="button"
                   v-if="!data.imagesUrl?.length || data.imagesUrl[data.imagesUrl.length - 1]"
                   @click="addImage"
+                  :disabled="data.imagesUrl?.length === 2 && data.imagesUrl?.[1] !== ''"
                 >
                   新增圖片
                 </button>
                 <button
-                  class="btn btn-sm btn-outline-danger"
+                  class="btn btn-sm btn-light"
                   type="button"
                   v-else
                   @click="removeImage"
+                  :disabled="data.imagesUrl?.length === 2 && data.imagesUrl?.[1] !== ''"
                 >
                   刪除圖片
                 </button>
@@ -122,7 +124,7 @@
                   </div>
                   <img
                     v-if="data.imageUrl"
-                    class="img-fluid"
+                    class="img-fluid mt-5"
                     :src="data.imageUrl"
                     alt="主圖"
                   />
@@ -143,7 +145,7 @@
                       />
                       <label :for="'floatingPic' + index" class="visually-hidden">請輸入網址或上傳圖片</label>
                     </div>
-                    <div class="col-md-4 position-relative" v-show="!image">
+                    <div class="col-md-4 position-relative ps-0" v-show="!image">
                       <button
                         class="d-block w-100 h-100 btn btn-sm btn-light"
                         type="button"
@@ -163,7 +165,7 @@
                     </div>
                   </div>
                   <img
-                    class="img-fluid"
+                    class="img-fluid mt-5"
                     v-show="image"
                     :src="image"
                     :alt="`配圖-${index}`"
@@ -213,7 +215,7 @@
           <div class="d-flex align-items-center justify-content-end mt-2">
             <button
               type="button"
-              class="btn btn-outline-secondary me-10"
+              class="btn btn-bright-gray me-10"
               data-bs-dismiss="modal"
             >
               取消

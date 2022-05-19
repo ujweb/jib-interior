@@ -37,7 +37,7 @@
                 <div class="col-4 ps-0">
                   <button
                     type="button"
-                    class="btn btn-outline-secondary"
+                    class="btn btn-bright-gray"
                     @click="randomCoupon(6)"
                   >
                     產生
@@ -78,7 +78,7 @@
                           placeholder="請選擇起始日"
                         />
                         <button
-                          class="btn btn-sm btn-outline-secondary"
+                          class="btn btn-sm btn-bright-gray"
                           type="button"
                           @click="togglePopover()"
                         >
@@ -110,7 +110,7 @@
                           placeholder="請選擇截止日"
                         />
                         <button
-                          class="btn btn-sm btn-outline-secondary"
+                          class="btn btn-sm btn-bright-gray"
                           type="button"
                           @click="togglePopover()"
                         >
@@ -144,7 +144,7 @@
           <div class="d-flex align-items-center justify-content-end mt-20">
             <button
               type="button"
-              class="btn btn-outline-secondary me-10"
+              class="btn btn-bright-gray me-10"
               data-bs-dismiss="modal"
             >
               取消

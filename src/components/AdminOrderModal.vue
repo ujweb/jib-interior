@@ -13,10 +13,10 @@
     >
       <div class="modal-content">
         <div class="modal-body p-30">
-          <h2 class="mb-2"><slot name="title"></slot></h2>
+          <h2 class="fs-3 mb-0"><slot name="title"></slot></h2>
           <div class="row">
             <div class="col-md-6">
-              <h5 class="fs-3 mb-0">訂購者資訊</h5>
+              <h5 class="fs-2 mt-30 mb-0">訂購者資訊</h5>
               <table class="table">
                 <tbody v-if="user">
                   <tr>
@@ -35,13 +35,13 @@
                     <th>地址</th>
                     <td>{{ user.address }}</td>
                   </tr>
-                  <tr>
+                  <tr v-if="data.message">
                     <th>留言</th>
                     <td>{{ data.message }}</td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="fs-3 mb-0">訂單細節</h5>
+              <h5 class="fs-2 mt-30 mb-0">訂單細節</h5>
               <table class="table">
                 <tbody>
                   <tr>
@@ -70,11 +70,11 @@
               </table>
             </div>
             <div class="col-md-6">
-              <h5 class="fs-3 mb-0">訂單內容</h5>
+              <h5 class="fs-2 mt-30 mb-0">訂單內容</h5>
               <table class="table">
                 <tbody v-if="user">
                   <tr v-for="detail in details" :key="detail.id">
-                    <td style="width: 150px">
+                    <td style="width: 120px">
                       <img
                         class="img-fluid"
                         :src="detail.product.imageUrl"
@@ -105,16 +105,34 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="d-flex align-items-center justify-content-between">
-                <div>
+              <div class="d-flex justify-content-between">
+                <div class="my-5">
                   共
                   <span class="text-primary">{{ getTotalQty(details) }}</span>
                   項
                 </div>
-                <div>
-                  總金額：<span class="fs-3 text-primary">{{
-                    toNumber(data.total)
-                  }}</span>
+                <div class="text-end">
+                  <div class="my-5">
+                    優惠碼：
+                    <span class="fs-3 text-primary">
+                      {{ Object.values(details)[0]?.coupon?.code }}
+                    </span>
+                  </div>
+                  <div class="my-5">
+                    優惠券折扣：
+                    <span class="fs-3 text-primary">
+                      {{
+                        toNumber(
+                          Object.values(details)[0]?.final_total -  Object.values(details)[0]?.total
+                        )
+                      }}
+                    </span>
+                  </div>
+                  <div class="my-5">
+                    總金額：<span class="fs-3 text-primary">{{
+                      toNumber(data.total)
+                    }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -139,7 +157,7 @@
           <div class="d-flex align-items-center justify-content-end mt-20">
             <button
               type="button"
-              class="btn btn-outline-secondary me-10"
+              class="btn btn-bright-gray me-10"
               data-bs-dismiss="modal"
             >
               取消

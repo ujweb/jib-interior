@@ -2,9 +2,16 @@
   <PageLoading />
   <div class="container-fluid">
     <div class="row">
-      <aside class="bg-light sidebar min-vh-100 py-2">
+      <aside class="bg-dark sidebar min-vh-100 px-30 py-20">
         <div class="position-sticky h-100 d-flex flex-column">
-          <h2 class="mb-20 py-20 border-bottom">jib 後台系統</h2>
+          <div class="mb-20 py-20 border-bottom">
+            <img
+              src="@/assets/images/logo-white.svg"
+              width="170"
+              alt="Jib Interior Studio"
+              class="d-block mx-auto"
+            />
+          </div>
           <ul class="nav flex-column">
             <li class="nav-item">
               <RouterLink to="/admin/products">
@@ -34,7 +41,7 @@
             </li>
           </ul>
           <div class="mt-auto"></div>
-          <ul class="nav flex-column border-top">
+          <ul class="nav flex-column border-top border-gray-300">
             <li class="nav-item">
               <button type="button" class="w-100" @click.prevent="logout">
                 登出
@@ -43,7 +50,7 @@
           </ul>
         </div>
       </aside>
-      <div class="content-wrapper p-20">
+      <div class="content-wrapper px-30 py-20">
         <RouterView v-if="checkAccount" />
       </div>
     </div>
@@ -110,6 +117,7 @@ export default {
 
 aside {
   width: 250px;
+  color: $white;
   ul {
     @include list(0, 0, none);
   }
@@ -122,7 +130,7 @@ aside {
       display: flex;
       align-items: center;
       padding: 0.75rem 0.5rem;
-      color: $black;
+      color: $white;
       text-decoration: none;
       border: 0;
       background-color: transparent;
@@ -131,7 +139,7 @@ aside {
         color: $primary;
       }
       &.router-link-active {
-        background-color: rgba($black, 0.05);
+        background-color: rgba($white, 0.05);
       }
     }
   }

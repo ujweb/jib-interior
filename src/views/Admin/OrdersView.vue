@@ -18,13 +18,13 @@
         <table class="table text-center align-middle">
           <thead class="table-light">
             <tr>
-              <th width="8%" scope="col">#</th>
+              <th width="6%" scope="col">#</th>
               <th width="14%" scope="col">收單時間</th>
-              <th width="14%" scope="col">訂單編號</th>
+              <th width="18%" scope="col">訂單編號</th>
               <th width="14%" scope="col">訂單金額</th>
               <th width="14%" scope="col">訂單狀態</th>
               <th width="14%" scope="col">付款時間</th>
-              <th width="22%" scope="col">編輯</th>
+              <th width="20%" scope="col">編輯</th>
             </tr>
           </thead>
           <tbody>
@@ -32,9 +32,6 @@
               <td>{{ index + 1 }}</td>
               <td>
                 {{ toDate(order.create_at) }}
-                <small class="d-block text-secondary">{{
-                  toTime(order.create_at)
-                }}</small>
               </td>
               <td><small>{{ order.id }}</small></td>
               <td>{{ toNumber(order.total) }}</td>
@@ -43,15 +40,23 @@
                 <span class="text-danger" v-else>未付款</span>
               </td>
               <td>
-                <p class="m-0" v-if="order.is_paid">
-                  <small class="d-block text-secondary">{{
-                    order.paid_date
-                  }}</small>
-                  <small class="d-block text-secondary">{{
-                    order.paid_time
-                  }}</small>
+                <p class="m-0" v-if="order.is_paid && checkDate(order.paid_date) > 0">
+                  <small class="d-block text-secondary">
+                    {{ order.paid_date }}
+                  </small>
+                  <small class="d-block text-secondary">
+                    {{ order.paid_time }}
+                  </small>
                 </p>
-                <p v-else>-</p>
+                <p class="m-0" v-else-if="order.is_paid">
+                  <small class="d-block text-secondary">
+                    {{ toDate(order.paid_date) }}
+                  </small>
+                  <small class="d-block text-secondary">
+                    {{ toTime(order.paid_date) }}
+                  </small>
+                </p>
+                <p class="m-0" v-else>-</p>
               </td>
               <td>
                 <button
@@ -65,7 +70,7 @@
                   訂單詳情
                 </button>
                 <button
-                  class="btn btn-sm btn-outline-danger"
+                  class="btn btn-sm btn-bright-gray"
                   type="button"
                   @click="
                     modal.title = '刪除訂單';
@@ -174,7 +179,7 @@ export default {
         is_paid: data.is_paid,
         paid_at: dateNow,
         paid_date: this.toDate(dateNow),
-        paid_time: `${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`,
+        paid_time: `${(`0${newDate.getHours()}`).substr(-2)}:${(`0${newDate.getMinutes()}`).substr(-2)}:${(`0${newDate.getSeconds()}`).substr(-2)}`,
       };
       // console.log(paid);
       let res = {};
@@ -259,6 +264,9 @@ export default {
     },
     toNumber(val) {
       return Number.parseInt(val, 10).toLocaleString();
+    },
+    checkDate(timestamp) {
+      return timestamp.toString().indexOf('/');
     },
     toDate(timestamp) {
       const newDate = new Date(timestamp * 1000);

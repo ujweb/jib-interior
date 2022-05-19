@@ -20,14 +20,14 @@
     <table class="table text-center align-middle">
       <thead class="table-light">
         <tr>
-          <th width="6%" scope="col">#</th>
-          <th width="12%" scope="col">id</th>
-          <th width="10%" scope="col">分類</th>
+          <th width="4%" scope="col">#</th>
+          <th width="17%" scope="col">id</th>
+          <th width="13%" scope="col">分類</th>
           <th class="text-start" scope="col">產品名稱</th>
           <th width="10%" scope="col">原價</th>
           <th width="10%" scope="col">售價</th>
-          <th width="10%" scope="col">是否啟用</th>
-          <th width="18%" scope="col">編輯</th>
+          <th width="8%" scope="col">是否啟用</th>
+          <th width="12%" scope="col">編輯</th>
         </tr>
       </thead>
       <tbody>
@@ -64,7 +64,7 @@
               編輯
             </button>
             <button
-              class="btn btn-sm btn-outline-danger"
+              class="btn btn-sm btn-bright-gray"
               type="button"
               @click="
                 modal.title = '刪除商品';

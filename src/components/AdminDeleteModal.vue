@@ -10,7 +10,7 @@
           <div class="d-flex align-items-center justify-content-end mt-2">
             <button
               type="button"
-              class="btn btn-outline-danger me-10"
+              class="btn btn-light me-10"
               data-bs-dismiss="modal"
             >
               取消

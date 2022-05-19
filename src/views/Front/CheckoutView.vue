@@ -261,6 +261,7 @@
                         class="form-control"
                         id="ask"
                         rows="3"
+                        v-model="message"
                         placeholder="請輸入備註"
                       ></textarea>
                     </div>

@@ -64,7 +64,7 @@
                     placeholder="請輸入主圖網址或上傳圖片"
                   />
                 </div>
-                <div class="col-md-4 position-relative" v-show="!data.img">
+                <div class="col-md-4 position-relative ps-0" v-show="!data.img">
                   <button
                     class="d-block w-100 h-100 btn btn-sm btn-light"
                     type="button"
@@ -98,7 +98,7 @@
                 :class="data.tag > 0 ? 'p-1' : ''"
               >
                 <div
-                  class="btn btn-sm btn-bright-gray btn-tags me-5 lh-1"
+                  class="btn btn-sm btn-light btn-tags me-5 lh-1"
                   v-for="(item, key) in data.tag"
                   :key="key"
                 >
@@ -193,7 +193,7 @@
                 :class="data.recommend > 0 ? 'p-1' : ''"
               >
                 <div
-                  class="btn btn-sm btn-bright-gray btn-recommends me-5 lh-1"
+                  class="btn btn-sm btn-light btn-recommends me-5 lh-1"
                   v-for="(item, key) in data.recommend"
                   :key="key"
                 >
@@ -242,7 +242,7 @@
           <div class="d-flex align-items-center justify-content-end mt-20">
             <button
               type="button"
-              class="btn btn-outline-secondary me-10"
+              class="btn btn-bright-gray me-10"
               data-bs-dismiss="modal"
             >
               取消
@@ -308,15 +308,11 @@ export default {
       this.$http
         .get(adminArticleApi)
         .then((res) => {
-          if (!res.data.success) {
-            this.$pushMessage(res);
-          }
           this.data.content = res.data.article.content;
           this.$emitter.emit('page-loading', false);
         })
-        .catch((err) => {
+        .catch(() => {
           this.$emitter.emit('page-loading', false);
-          this.$pushMessage(err);
         });
     },
     addTag() {
@@ -386,6 +382,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~bootstrap/scss/functions";
+@import "src/assets/sass/variables";
+
 .btn.btn-sm {
   min-width: auto;
 }
@@ -394,5 +393,8 @@ export default {
 }
 .ck.ck-content {
   height: 300px;
+}
+.vc-highlight {
+  background-color: $primary !important;
 }
 </style>
